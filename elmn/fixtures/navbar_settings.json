@@ -90,7 +90,7 @@
     "route": "https://frappe.io/support"
    }
   ],
-  "modified": "2026-06-26 10:56:51.191718",
+  "modified": "2026-06-26 11:10:50.310148",
   "name": "Navbar Settings",
   "settings_dropdown": [
    {
@@ -190,16 +190,16 @@
     "route": null
    },
    {
-    "action": null,
+    "action": "frappe.set_route('Form', 'User', frappe.session.user)",
     "condition": null,
     "hidden": 0,
     "is_standard": 0,
     "item_label": "Language",
-    "item_type": "Route",
+    "item_type": "Action",
     "parent": "Navbar Settings",
     "parentfield": "settings_dropdown",
     "parenttype": "Navbar Settings",
-    "route": "/app/user/{{ frappe.session.user }}"
+    "route": null
    },
    {
     "action": null,

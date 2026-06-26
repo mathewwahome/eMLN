@@ -255,4 +255,6 @@ after_migrate = [
 
 fixtures = [
     "Navbar Settings",
+    "Role",
+	"Role Profile",
 ]
