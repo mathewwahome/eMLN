@@ -102,7 +102,7 @@ app_license = "mit"
 
 
 after_migrate = [
-    # "elmn.api.setup_utils.post_install"
+    "elmn.api.setup_utils.post_install"
 ]
 
 # Integration Cleanup
@@ -253,3 +253,8 @@ after_migrate = [
 # List of apps whose translatable strings should be excluded from this app's translations.
 # ignore_translatable_strings_from = []
 
+fixtures = [
+    "Navbar Settings",
+    "Role",
+	"Role Profile",
+]
