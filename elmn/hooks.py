@@ -257,4 +257,9 @@ fixtures = [
     "Navbar Settings",
     "Role",
 	"Role Profile",
+ 	"System Settings",
+	"Print Format",
+	"Workflow",
+	"Workflow State",
+	"Workflow Action"
 ]
