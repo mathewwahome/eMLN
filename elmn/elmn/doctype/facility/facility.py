@@ -5,5 +5,5 @@
 from frappe.model.document import Document
 
 
-class FacilityRegistration(Document):
+class Facility(Document):
 	pass
