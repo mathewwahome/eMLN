@@ -1,0 +1,179 @@
+{
+ "actions": [],
+ "allow_rename": 1,
+ "creation": "2026-07-06 08:06:44.416260",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "facility_name",
+  "facility_registration_number",
+  "facility_level",
+  "column_break_omni",
+  "registration_status",
+  "section_break_ropa",
+  "region",
+  "district",
+  "section_break_gwvn",
+  "physical_address",
+  "geocode",
+  "section_break_cylq",
+  "contact_person_name",
+  "column_break_bmhh",
+  "contact_person_phone",
+  "contact_person_email",
+  "section_break_ptro",
+  "registration_certificate",
+  "column_break_ooaz",
+  "operating_licence",
+  "section_break_qwyt",
+  "application_submission_date",
+  "verification_date"
+ ],
+ "fields": [
+  {
+   "fieldname": "facility_name",
+   "fieldtype": "Data",
+   "label": "Facility name"
+  },
+  {
+   "fieldname": "facility_registration_number",
+   "fieldtype": "Data",
+   "label": "Facility registration number"
+  },
+  {
+   "fieldname": "facility_level",
+   "fieldtype": "Select",
+   "label": "Facility level",
+   "options": "Hospital\nClinic\nHealth centre\nDispensary"
+  },
+  {
+   "fieldname": "column_break_omni",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Geographic coordinates (latitude/longitude) of the facility",
+   "fieldname": "geocode",
+   "fieldtype": "Data",
+   "label": "Geocode"
+  },
+  {
+   "description": "Name of the facility's primary registration contact",
+   "fieldname": "contact_person_name",
+   "fieldtype": "Data",
+   "label": "Contact person name"
+  },
+  {
+   "description": "Phone number of the primary contact",
+   "fieldname": "contact_person_phone",
+   "fieldtype": "Data",
+   "label": "Contact person phone"
+  },
+  {
+   "description": "Email of the primary contact",
+   "fieldname": "contact_person_email",
+   "fieldtype": "Data",
+   "label": "Contact person email"
+  },
+  {
+   "description": "Current status of the facility registration application",
+   "fieldname": "operating_licence",
+   "fieldtype": "Attach",
+   "label": "Operating licence"
+  },
+  {
+   "description": "Uploaded copy of the facility's registration certificate",
+   "fieldname": "registration_certificate",
+   "fieldtype": "Attach",
+   "label": "Registration certificate"
+  },
+  {
+   "fieldname": "registration_status",
+   "fieldtype": "Select",
+   "label": "Registration status",
+   "options": "Pending verification\nApproved\nRejected"
+  },
+  {
+   "fieldname": "section_break_ropa",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Region where the facility is located.\nMust be selected from predefined Tanzania region list.",
+   "fieldname": "region",
+   "fieldtype": "Data",
+   "label": "Region"
+  },
+  {
+   "description": "District where the facility is located.\nDependent on Region selected",
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "label": "District"
+  },
+  {
+   "fieldname": "section_break_gwvn",
+   "fieldtype": "Section Break"
+  },
+  {
+   "description": "Street or physical location description of the facility.",
+   "fieldname": "physical_address",
+   "fieldtype": "Data",
+   "label": "Physical address"
+  },
+  {
+   "fieldname": "section_break_qwyt",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "application_submission_date",
+   "fieldtype": "Date",
+   "label": "Application submission date"
+  },
+  {
+   "fieldname": "verification_date",
+   "fieldtype": "Date",
+   "label": "Verification date"
+  },
+  {
+   "fieldname": "section_break_cylq",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_bmhh",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "section_break_ptro",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "column_break_ooaz",
+   "fieldtype": "Column Break"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-06 08:26:59.821357",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Facility",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

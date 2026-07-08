@@ -58,11 +58,11 @@
   "doctype": "Role",
   "home_page": null,
   "is_custom": 0,
-  "modified": "2026-06-22 16:12:34.778043",
+  "modified": "2026-07-06 08:48:18.636917",
   "name": "System Manager",
   "restrict_to_domain": null,
   "role_name": "System Manager",
-  "two_factor_auth": 0
+  "two_factor_auth": 1
  },
  {
   "desk_access": 1,
@@ -721,11 +721,11 @@
   "doctype": "Role",
   "home_page": null,
   "is_custom": 0,
-  "modified": "2026-06-26 11:29:52.708481",
+  "modified": "2026-07-06 08:48:30.005452",
   "name": "System Administrator",
   "restrict_to_domain": null,
   "role_name": "System Administrator",
-  "two_factor_auth": 0
+  "two_factor_auth": 1
  },
  {
   "desk_access": 1,
