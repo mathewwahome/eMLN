@@ -1,11 +1,15 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "naming_series:",
  "creation": "2026-07-06 08:06:44.416260",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
+  "facility_information_section",
+  "naming_series",
   "facility_name",
+  "column_break_wbdn",
   "facility_registration_number",
   "facility_level",
   "column_break_omni",
@@ -33,7 +37,8 @@
   {
    "fieldname": "facility_name",
    "fieldtype": "Data",
-   "label": "Facility name"
+   "label": "Facility name",
+   "reqd": 1
   },
   {
    "fieldname": "facility_registration_number",
@@ -94,7 +99,8 @@
   },
   {
    "fieldname": "section_break_ropa",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Location Details"
   },
   {
    "description": "Region where the facility is located.\nMust be selected from predefined Tanzania region list.",
@@ -110,7 +116,8 @@
   },
   {
    "fieldname": "section_break_gwvn",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Address"
   },
   {
    "description": "Street or physical location description of the facility.",
@@ -147,15 +154,35 @@
   {
    "fieldname": "column_break_ooaz",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "F-.YYYY.-.MM.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Series",
+   "options": "F-.YYYY.-.MM.-",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "facility_information_section",
+   "fieldtype": "Section Break",
+   "label": "Facility Information"
+  },
+  {
+   "fieldname": "column_break_wbdn",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-06 08:26:59.821357",
+ "modified": "2026-07-08 08:58:40.434250",
  "modified_by": "Administrator",
  "module": "eLMN",
  "name": "Facility",
+ "naming_rule": "By \"Naming Series\" field",
  "owner": "Administrator",
  "permissions": [
   {
