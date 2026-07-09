@@ -14,6 +14,7 @@
   "facility_level",
   "column_break_omni",
   "registration_status",
+  "facility_status",
   "section_break_ropa",
   "region",
   "district",
@@ -37,23 +38,27 @@
   {
    "fieldname": "facility_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Facility name",
    "reqd": 1
   },
   {
    "fieldname": "facility_registration_number",
    "fieldtype": "Data",
-   "label": "Facility registration number"
+   "in_list_view": 1,
+   "label": "Facility registration number",
+   "reqd": 1
   },
   {
    "fieldname": "facility_level",
-   "fieldtype": "Select",
+   "fieldtype": "Link",
    "label": "Facility level",
-   "options": "Hospital\nClinic\nHealth centre\nDispensary"
+   "options": "Facility Level"
   },
   {
    "fieldname": "column_break_omni",
-   "fieldtype": "Column Break"
+   "fieldtype": "Column Break",
+   "label": "Status"
   },
   {
    "description": "Geographic coordinates (latitude/longitude) of the facility",
@@ -173,12 +178,18 @@
   {
    "fieldname": "column_break_wbdn",
    "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "facility_status",
+   "fieldtype": "Check",
+   "label": "Facility Status"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-08 08:58:40.434250",
+ "modified": "2026-07-08 09:14:04.770378",
  "modified_by": "Administrator",
  "module": "eLMN",
  "name": "Facility",

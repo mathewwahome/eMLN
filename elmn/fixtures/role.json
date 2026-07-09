@@ -6,11 +6,11 @@
   "doctype": "Role",
   "home_page": null,
   "is_custom": 0,
-  "modified": "2026-06-22 16:12:34.749436",
+  "modified": "2026-07-09 10:42:25.103046",
   "name": "All",
   "restrict_to_domain": null,
   "role_name": "All",
-  "two_factor_auth": 0
+  "two_factor_auth": 1
  },
  {
   "desk_access": 1,
