@@ -22,6 +22,7 @@
   "physical_address",
   "geocode",
   "section_break_cylq",
+  "select_contact",
   "contact_person_name",
   "column_break_bmhh",
   "contact_person_phone",
@@ -68,21 +69,28 @@
   },
   {
    "description": "Name of the facility's primary registration contact",
+   "fetch_from": "select_contact.full_name",
    "fieldname": "contact_person_name",
    "fieldtype": "Data",
-   "label": "Contact person name"
+   "label": "Contact person name",
+   "read_only": 1,
+   "reqd": 1
   },
   {
    "description": "Phone number of the primary contact",
+   "fetch_from": "select_contact.phone",
    "fieldname": "contact_person_phone",
    "fieldtype": "Data",
-   "label": "Contact person phone"
+   "label": "Contact person phone",
+   "read_only": 1
   },
   {
    "description": "Email of the primary contact",
+   "fetch_from": "select_contact.email_id",
    "fieldname": "contact_person_email",
    "fieldtype": "Data",
-   "label": "Contact person email"
+   "label": "Contact person email",
+   "read_only": 1
   },
   {
    "description": "Current status of the facility registration application",
@@ -146,7 +154,8 @@
   },
   {
    "fieldname": "section_break_cylq",
-   "fieldtype": "Section Break"
+   "fieldtype": "Section Break",
+   "label": "Primary Contact Information"
   },
   {
    "fieldname": "column_break_bmhh",
@@ -164,7 +173,6 @@
    "default": "F-.YYYY.-.MM.-",
    "fieldname": "naming_series",
    "fieldtype": "Select",
-   "in_list_view": 1,
    "label": "Series",
    "options": "F-.YYYY.-.MM.-",
    "read_only": 1,
@@ -184,12 +192,21 @@
    "fieldname": "facility_status",
    "fieldtype": "Check",
    "label": "Facility Status"
+  },
+  {
+   "description": "Select from the already existing contacts or create a new one.",
+   "fieldname": "select_contact",
+   "fieldtype": "Link",
+   "ignore_user_permissions": 1,
+   "label": "Select Contact",
+   "options": "Contact",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-08 09:14:04.770378",
+ "modified": "2026-07-12 19:58:19.635695",
  "modified_by": "Administrator",
  "module": "eLMN",
  "name": "Facility",
