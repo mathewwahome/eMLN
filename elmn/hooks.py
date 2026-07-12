@@ -261,5 +261,5 @@ fixtures = [
 	"Print Format",
 	"Workflow",
 	"Workflow State",
-	"Workflow Action"
+	"Workflow Action",
 ]
