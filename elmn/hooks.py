@@ -263,4 +263,31 @@ fixtures = [
 	"Workflow",
 	"Workflow State",
 	"Workflow Action",
+	"Facility Level",
+	{
+		"doctype": "Web Form",
+		"filters": [["name", "=", "facility-registration"]],
+	},
+	{
+		"doctype": "Email Template",
+		"filters": [
+			[
+				"name",
+				"in",
+				[
+					"invitation",
+					"invitation_cancelled",
+					"submission_confirmation",
+					"approval",
+					"registration_pending",
+					"rejection",
+					"facility_user_request_rejected",
+					"facility_user_request_pending",
+					"facility_offboarded",
+					"facility_reactivated",
+					"facility_account_activation",
+				],
+			]
+		],
+	},
 ]

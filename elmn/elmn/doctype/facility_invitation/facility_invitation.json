@@ -1,0 +1,281 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:INV-{#####}",
+ "creation": "2026-07-13 07:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "invitation_details_section",
+  "facility_legal_name",
+  "contact_email",
+  "column_break_details",
+  "status",
+  "expiry_days_override",
+  "custom_message",
+  "prefill_section",
+  "prefill_facility_level",
+  "prefill_region",
+  "prefill_district",
+  "column_break_prefill",
+  "prefill_physical_address",
+  "prefill_phone",
+  "tracking_section",
+  "invitation_token_hash",
+  "token_generated_on",
+  "expiry_date",
+  "sent_on",
+  "column_break_tracking",
+  "link_clicked_on",
+  "registration_started_on",
+  "registration_submitted_on",
+  "column_break_tracking_2",
+  "resend_count",
+  "facility",
+  "cancellation_section",
+  "cancelled_on",
+  "cancelled_by",
+  "column_break_cancellation",
+  "cancellation_reason"
+ ],
+ "fields": [
+  {
+   "fieldname": "invitation_details_section",
+   "fieldtype": "Section Break",
+   "label": "Invitation Details"
+  },
+  {
+   "fieldname": "facility_legal_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Facility legal name",
+   "reqd": 1
+  },
+  {
+   "description": "Primary contact email the invitation link is sent to.",
+   "fieldname": "contact_email",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Contact email",
+   "options": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending\nSent\nOpened\nLink Clicked\nRegistration Started\nRegistration Submitted\nExpired\nCancelled\nResent",
+   "read_only": 1
+  },
+  {
+   "description": "Overrides the site-wide default validity period (Invitation Settings) for this invitation only.",
+   "fieldname": "expiry_days_override",
+   "fieldtype": "Int",
+   "label": "Expiry days override"
+  },
+  {
+   "fieldname": "custom_message",
+   "fieldtype": "Small Text",
+   "label": "Custom message"
+  },
+  {
+   "collapsible": 1,
+   "description": "Optional details pre-populated into the registration form; the facility can edit any of these later.",
+   "fieldname": "prefill_section",
+   "fieldtype": "Section Break",
+   "label": "Pre-fill Details"
+  },
+  {
+   "fieldname": "prefill_facility_level",
+   "fieldtype": "Link",
+   "label": "Facility level",
+   "options": "Facility Level"
+  },
+  {
+   "fieldname": "prefill_region",
+   "fieldtype": "Data",
+   "label": "Region"
+  },
+  {
+   "fieldname": "prefill_district",
+   "fieldtype": "Data",
+   "label": "District"
+  },
+  {
+   "fieldname": "column_break_prefill",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "prefill_physical_address",
+   "fieldtype": "Small Text",
+   "label": "Physical address"
+  },
+  {
+   "fieldname": "prefill_phone",
+   "fieldtype": "Data",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "tracking_section",
+   "fieldtype": "Section Break",
+   "label": "Tracking"
+  },
+  {
+   "fieldname": "invitation_token_hash",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "Invitation token hash",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "token_generated_on",
+   "fieldtype": "Datetime",
+   "label": "Token generated on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "expiry_date",
+   "fieldtype": "Date",
+   "label": "Expiry date",
+   "read_only": 1
+  },
+  {
+   "fieldname": "sent_on",
+   "fieldtype": "Datetime",
+   "label": "Sent on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tracking",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "link_clicked_on",
+   "fieldtype": "Datetime",
+   "label": "Link clicked on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "registration_started_on",
+   "fieldtype": "Datetime",
+   "label": "Registration started on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "registration_submitted_on",
+   "fieldtype": "Datetime",
+   "label": "Registration submitted on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_tracking_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "0",
+   "fieldname": "resend_count",
+   "fieldtype": "Int",
+   "label": "Resend count",
+   "read_only": 1
+  },
+  {
+   "description": "Facility record created once this invitation's registration is submitted.",
+   "fieldname": "facility",
+   "fieldtype": "Link",
+   "label": "Facility",
+   "options": "Facility",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.status==\"Cancelled\"",
+   "fieldname": "cancellation_section",
+   "fieldtype": "Section Break",
+   "label": "Cancellation"
+  },
+  {
+   "fieldname": "cancelled_on",
+   "fieldtype": "Datetime",
+   "label": "Cancelled on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "cancelled_by",
+   "fieldtype": "Link",
+   "label": "Cancelled by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_cancellation",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "cancellation_reason",
+   "fieldtype": "Small Text",
+   "label": "Cancellation reason",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-13 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Facility Invitation",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Registration Officer",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

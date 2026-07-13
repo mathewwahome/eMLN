@@ -1,44 +1,77 @@
 import frappe
 from frappe import _
 
+from elmn.api.emails import send_templated_email
+
 
 def _users_with_role(role):
 	user_names = frappe.get_all(
 		"Has Role", filters={"role": role, "parenttype": "User"}, pluck="parent"
 	)
 	return frappe.get_all(
-		"User", filters={"name": ["in", user_names], "enabled": 1}, pluck="email"
+		"User", filters={"name": ["in", user_names], "enabled": 1}, fields=["name", "email"]
 	)
 
 
+def _create_notification_log(user_names, subject, facility):
+	for user in user_names:
+		frappe.get_doc(
+			{
+				"doctype": "Notification Log",
+				"for_user": user,
+				"subject": subject,
+				"type": "Alert",
+				"document_type": facility.doctype,
+				"document_name": facility.name,
+			}
+		).insert(ignore_permissions=True)
+
+
 def notify_registration_officer(facility):
-	recipients = _users_with_role("Registration Officer") or _users_with_role("System Manager")
-	if not recipients:
+	users = _users_with_role("Registration Officer") or _users_with_role("System Manager")
+	if not users:
 		frappe.logger().warning(
 			f"Facility {facility.name}: no Registration Officer (or System Manager) to notify"
 		)
 		return
 
-	frappe.sendmail(
-		recipients=recipients,
-		subject=_("Facility registration pending verification: {0}").format(facility.facility_name),
-		message=frappe.render_template(
-			"""
-			<p>A new facility registration is pending verification against the National Facility Register.</p>
-			<ul>
-				<li><b>Facility:</b> {{ facility_name }}</li>
-				<li><b>Registration number:</b> {{ facility_registration_number }}</li>
-				<li><b>Submitted by:</b> {{ contact_person_name }}</li>
-			</ul>
-			<p><a href="{{ url }}">Review the registration</a></p>
-			""",
-			{
-				"facility_name": facility.facility_name,
-				"facility_registration_number": facility.facility_registration_number,
-				"contact_person_name": facility.contact_person_name,
-				"url": frappe.utils.get_url(f"/app/facility/{facility.name}"),
-			},
-		),
+	recipients = [u.email for u in users if u.email]
+	subject = _("Facility registration pending verification: {0}").format(facility.facility_name)
+
+	send_templated_email(
+		"registration_pending",
+		recipients,
+		{
+			"facility_name": facility.facility_name,
+			"facility_registration_number": facility.facility_registration_number,
+			"contact_person_name": facility.contact_person_name,
+			"url": frappe.utils.get_url(f"/app/facility/{facility.name}"),
+		},
+		default_subject=subject,
+		reference_doctype=facility.doctype,
+		reference_name=facility.name,
+	)
+	_create_notification_log([u.name for u in users], subject, facility)
+
+
+def notify_applicant_submission_received(facility):
+	if not facility.contact_person_email:
+		return
+
+	expected_processing_days = frappe.db.get_single_value(
+		"Invitation Settings", "expected_processing_days"
+	) or 5
+
+	send_templated_email(
+		"submission_confirmation",
+		[facility.contact_person_email],
+		{
+			"contact_person_name": facility.contact_person_name,
+			"facility_name": facility.facility_name,
+			"reference_number": facility.name,
+			"expected_processing_days": expected_processing_days,
+		},
+		default_subject=_("We've received your facility registration: {0}").format(facility.name),
 		reference_doctype=facility.doctype,
 		reference_name=facility.name,
 	)
@@ -48,24 +81,54 @@ def notify_rejection(facility):
 	if not facility.contact_person_email:
 		return
 
-	frappe.sendmail(
-		recipients=[facility.contact_person_email],
-		subject=_("Your facility registration was not approved"),
-		message=frappe.render_template(
-			"""
-			<p>Dear {{ contact_person_name }},</p>
-			<p>Your registration for <b>{{ facility_name }}</b> was not approved.</p>
-			<p><b>Reason:</b> {{ reason }}</p>
-			<p>You may correct the details above and resubmit the registration.</p>
-			""",
-			{
-				"contact_person_name": facility.contact_person_name,
-				"facility_name": facility.facility_name,
-				"reason": facility.rejection_reason,
-			},
-		),
+	send_templated_email(
+		"rejection",
+		[facility.contact_person_email],
+		{
+			"contact_person_name": facility.contact_person_name,
+			"facility_name": facility.facility_name,
+			"reason": facility.rejection_reason,
+		},
+		default_subject=_("Your facility registration was not approved"),
 		reference_doctype=facility.doctype,
 		reference_name=facility.name,
+	)
+
+
+def notify_approval(facility):
+	if not facility.contact_person_email:
+		return
+
+	send_templated_email(
+		"approval",
+		[facility.contact_person_email],
+		{
+			"contact_person_name": facility.contact_person_name,
+			"facility_name": facility.facility_name,
+			"reference_number": facility.name,
+		},
+		default_subject=_("Your facility registration was approved: {0}").format(facility.facility_name),
+		reference_doctype=facility.doctype,
+		reference_name=facility.name,
+	)
+
+
+def send_activation_email(user_doc, contact_person_name, facility_name, reference_doctype=None, reference_name=None):
+	"""Send a branded, Email-Template-editable activation link instead of Frappe's generic reset-password email."""
+	user_doc.validate_reset_password()
+	link = user_doc._reset_password(send_email=False)
+
+	send_templated_email(
+		"facility_account_activation",
+		[user_doc.email],
+		{
+			"contact_person_name": contact_person_name,
+			"facility_name": facility_name,
+			"link": link,
+		},
+		default_subject=_("Activate your eLMN account"),
+		reference_doctype=reference_doctype,
+		reference_name=reference_name,
 	)
 
 
@@ -92,12 +155,14 @@ def provision_facility_account(facility):
 		user.insert(ignore_permissions=True)
 		user_name = user.name
 
+	frappe.db.set_value("User", user_name, "custom_facility", facility.name)
 	facility.db_set("facility_user", user_name)
 	facility.db_set("account_status", "Pending Activation")
 
 	user_doc = frappe.get_doc("User", user_name)
-	user_doc.validate_reset_password()
-	user_doc._reset_password(send_email=True)
+	send_activation_email(
+		user_doc, facility.contact_person_name, facility.facility_name, facility.doctype, facility.name
+	)
 
 
 def on_facility_update(doc, method=None):
@@ -107,10 +172,12 @@ def on_facility_update(doc, method=None):
 
 	if doc.workflow_state == "Registration Officer":
 		notify_registration_officer(doc)
+		notify_applicant_submission_received(doc)
 	elif doc.workflow_state == "Rejected":
 		notify_rejection(doc)
 	elif doc.workflow_state == "Approved":
 		provision_facility_account(doc)
+		notify_approval(doc)
 
 
 def on_user_update(doc, method=None):

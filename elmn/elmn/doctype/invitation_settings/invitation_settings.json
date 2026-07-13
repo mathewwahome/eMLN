@@ -1,0 +1,72 @@
+{
+ "actions": [],
+ "creation": "2026-07-13 07:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "default_expiry_days",
+  "expected_processing_days",
+  "column_break_settings",
+  "support_email",
+  "support_phone"
+ ],
+ "fields": [
+  {
+   "default": "14",
+   "description": "Default number of days a facility invitation link remains valid. Can be overridden per invitation.",
+   "fieldname": "default_expiry_days",
+   "fieldtype": "Int",
+   "label": "Default expiry (days)",
+   "reqd": 1
+  },
+  {
+   "default": "5",
+   "description": "Shown to applicants as the expected review turnaround time.",
+   "fieldname": "expected_processing_days",
+   "fieldtype": "Int",
+   "label": "Expected processing time (days)",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_settings",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "Shown to applicants in invitation and confirmation emails.",
+   "fieldname": "support_email",
+   "fieldtype": "Data",
+   "label": "MLN support email",
+   "options": "Email"
+  },
+  {
+   "fieldname": "support_phone",
+   "fieldtype": "Data",
+   "label": "MLN support phone"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-07-13 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Invitation Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

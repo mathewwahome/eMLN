@@ -16,10 +16,17 @@
   "column_break_omni",
   "workflow_state",
   "registration_status",
+  "registration_source",
+  "invitation",
+  "invitation_token",
   "facility_status",
   "rejection_reason",
   "account_status",
   "facility_user",
+  "operational_status",
+  "offboarding_reason",
+  "offboarded_by",
+  "offboarded_on",
   "section_break_ropa",
   "region",
   "district",
@@ -29,13 +36,16 @@
   "section_break_cylq",
   "select_contact",
   "contact_person_name",
+  "contact_person_role",
   "column_break_bmhh",
   "contact_person_phone",
   "contact_person_email",
+  "contact_person_employee_id",
   "section_break_ptro",
   "registration_certificate",
   "column_break_ooaz",
   "operating_licence",
+  "tax_compliance_certificate",
   "section_break_qwyt",
   "application_submission_date",
   "verification_date"
@@ -85,7 +95,6 @@
    "fieldname": "contact_person_name",
    "fieldtype": "Data",
    "label": "Contact person name",
-   "read_only": 1,
    "reqd": 1
   },
   {
@@ -93,16 +102,26 @@
    "fetch_from": "select_contact.phone",
    "fieldname": "contact_person_phone",
    "fieldtype": "Data",
-   "label": "Contact person phone",
-   "read_only": 1
+   "label": "Contact person phone"
   },
   {
    "description": "Email of the primary contact",
    "fetch_from": "select_contact.email_id",
    "fieldname": "contact_person_email",
    "fieldtype": "Data",
-   "label": "Contact person email",
-   "read_only": 1
+   "label": "Contact person email"
+  },
+  {
+   "description": "Role/title of the contact person at the facility (e.g. Pharmacist, Administrator).",
+   "fieldname": "contact_person_role",
+   "fieldtype": "Data",
+   "label": "Contact person role"
+  },
+  {
+   "description": "Employee ID of the contact person, if applicable.",
+   "fieldname": "contact_person_employee_id",
+   "fieldtype": "Data",
+   "label": "Contact person employee ID"
   },
   {
    "description": "Current status of the facility registration application",
@@ -115,6 +134,12 @@
    "fieldname": "registration_certificate",
    "fieldtype": "Attach",
    "label": "Registration certificate"
+  },
+  {
+   "description": "Uploaded copy of the facility's tax compliance certificate",
+   "fieldname": "tax_compliance_certificate",
+   "fieldtype": "Attach",
+   "label": "Tax compliance certificate"
   },
   {
    "fieldname": "registration_status",
@@ -132,6 +157,30 @@
    "mandatory_depends_on": "eval:doc.workflow_state==\"Rejected\""
   },
   {
+   "default": "Self-Registered",
+   "fieldname": "registration_source",
+   "fieldtype": "Select",
+   "label": "Registration source",
+   "options": "Self-Registered\nInvited",
+   "read_only": 1
+  },
+  {
+   "description": "Facility Invitation this registration was submitted against, if any.",
+   "fieldname": "invitation",
+   "fieldtype": "Link",
+   "label": "Invitation",
+   "no_copy": 1,
+   "options": "Facility Invitation",
+   "read_only": 1
+  },
+  {
+   "description": "Transient invitation token supplied by the public registration form; resolved and cleared on insert.",
+   "fieldname": "invitation_token",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "no_copy": 1
+  },
+  {
    "default": "Pending Activation",
    "fieldname": "account_status",
    "fieldtype": "Select",
@@ -145,6 +194,37 @@
    "fieldtype": "Link",
    "label": "Facility user",
    "options": "User",
+   "read_only": 1
+  },
+  {
+   "default": "Active",
+   "fieldname": "operational_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Operational status",
+   "options": "Active\nSuspended\nRemoved",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.operational_status==\"Suspended\"||doc.operational_status==\"Removed\"",
+   "description": "Reason provided when suspending or removing this facility.",
+   "fieldname": "offboarding_reason",
+   "fieldtype": "Small Text",
+   "label": "Offboarding reason",
+   "mandatory_depends_on": "eval:doc.operational_status==\"Suspended\"||doc.operational_status==\"Removed\""
+  },
+  {
+   "fieldname": "offboarded_by",
+   "fieldtype": "Link",
+   "label": "Offboarded by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "offboarded_on",
+   "fieldtype": "Datetime",
+   "label": "Offboarded on",
    "read_only": 1
   },
   {
@@ -231,13 +311,12 @@
    "label": "Facility Status"
   },
   {
-   "description": "Select from the already existing contacts or create a new one.",
+   "description": "Optional: select an already existing contact to auto-fill the fields below.",
    "fieldname": "select_contact",
    "fieldtype": "Link",
    "ignore_user_permissions": 1,
    "label": "Select Contact",
-   "options": "Contact",
-   "reqd": 1
+   "options": "Contact"
   }
  ],
  "grid_page_length": 50,

@@ -1,0 +1,112 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:46:56.724856",
+  "name": "invitation",
+  "response": null,
+  "response_html": "<p>{{ _(\"Dear\") }} {{ facility_legal_name }} {{ _(\"team\") }},</p>\n<p>{{ _(\"The Medicines Logistics Network (MLN) has invited your facility to register on the eLMN platform.\") }}</p>\n{% if custom_message %}\n<p>{{ custom_message }}</p>\n{% endif %}\n<p><a class=\"btn btn-primary\" href=\"{{ link }}\">{{ _(\"Start your registration\") }}</a></p>\n<p>{{ _(\"Please have the following documents ready to upload:\") }}</p>\n<ul>\n\t<li>{{ _(\"Certificate of Registration\") }}</li>\n\t<li>{{ _(\"Tax Compliance Certificate\") }}</li>\n\t<li>{{ _(\"Pharmacy Licence\") }}</li>\n</ul>\n<p>{{ _(\"Once submitted, review typically takes about {0} day(s).\").format(expected_processing_days) }}</p>\n<p>\n\t{{ _(\"Questions? Contact MLN\") }}\n\t{% if support_email %}at <a href=\"mailto:{{ support_email }}\">{{ support_email }}</a>{% endif %}\n\t{% if support_phone %}({{ support_phone }}){% endif %}.\n</p>\n",
+  "subject": "You're invited to register {{ facility_legal_name }} on eLMN",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.785497",
+  "name": "invitation_cancelled",
+  "response": null,
+  "response_html": "<p>{{ _(\"Dear\") }} {{ facility_legal_name }} {{ _(\"team\") }},</p>\n<p>{{ _(\"Your invitation to register on the eLMN platform has been cancelled.\") }}</p>\n<p><b>{{ _(\"Reason\") }}:</b> {{ reason }}</p>\n<p>{{ _(\"If you believe this was in error, please contact MLN.\") }}</p>\n",
+  "subject": "Your invitation to register {{ facility_legal_name }} has been cancelled",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.795230",
+  "name": "submission_confirmation",
+  "response": null,
+  "response_html": "<p>{{ _(\"Dear\") }} {{ contact_person_name }},</p>\n<p>{{ _(\"We've received your registration for {0}.\").format(facility_name) }}</p>\n<p>{{ _(\"Reference number\") }}: <b>{{ reference_number }}</b></p>\n<p>{{ _(\"Expected processing time: about {0} day(s).\").format(expected_processing_days) }}</p>\n<p>{{ _(\"We will email you once a decision has been made.\") }}</p>\n",
+  "subject": "We've received your facility registration: {{ reference_number }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.804176",
+  "name": "approval",
+  "response": null,
+  "response_html": "<p>{{ _(\"Dear\") }} {{ contact_person_name }},</p>\n<p>{{ _(\"Good news - your registration for {0} has been approved.\").format(facility_name) }}</p>\n<p>{{ _(\"Reference number\") }}: <b>{{ reference_number }}</b></p>\n<p>{{ _(\"We're setting up your facility account now. You'll receive a separate email shortly with a link to activate it and set your password.\") }}</p>\n",
+  "subject": "Your facility registration was approved: {{ facility_name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.810265",
+  "name": "registration_pending",
+  "response": null,
+  "response_html": "<p>A new facility registration is pending verification against the National Facility Register.</p>\n<ul>\n\t<li><b>Facility:</b> {{ facility_name }}</li>\n\t<li><b>Registration number:</b> {{ facility_registration_number }}</li>\n\t<li><b>Submitted by:</b> {{ contact_person_name }}</li>\n</ul>\n<p><a href=\"{{ url }}\">Review the registration</a></p>\n",
+  "subject": "Facility registration pending verification: {{ facility_name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.817764",
+  "name": "rejection",
+  "response": null,
+  "response_html": "<p>Dear {{ contact_person_name }},</p>\n<p>Your registration for <b>{{ facility_name }}</b> was not approved.</p>\n<p><b>Reason:</b> {{ reason }}</p>\n<p>You may correct the details above and resubmit the registration.</p>\n",
+  "subject": "Your facility registration was not approved",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.827246",
+  "name": "facility_user_request_rejected",
+  "response": null,
+  "response_html": "<p>{{ _(\"Hello\") }},</p>\n<p>{{ _(\"Your request to add {0} as a staff account for {1} was not approved.\").format(requested_user_name, facility) }}</p>\n<p><b>{{ _(\"Reason\") }}:</b> {{ reason }}</p>\n<p>{{ _(\"You may submit a new request once the issue above has been addressed.\") }}</p>\n",
+  "subject": "Your staff account request for {{ requested_user_name }} was not approved",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.835274",
+  "name": "facility_user_request_pending",
+  "response": null,
+  "response_html": "<p>A facility administrator has requested a new staff account.</p>\n<ul>\n\t<li><b>Facility:</b> {{ facility }}</li>\n\t<li><b>Name:</b> {{ requested_user_name }}</li>\n\t<li><b>Requested role:</b> {{ requested_role }}</li>\n\t<li><b>Contact email:</b> {{ contact_email }}</li>\n</ul>\n<p><a href=\"{{ url }}\">Review the request</a></p>\n",
+  "subject": "New facility staff account request: {{ requested_user_name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.844273",
+  "name": "facility_offboarded",
+  "response": null,
+  "response_html": "<p>{{ _(\"Dear\") }} {{ contact_person_name }},</p>\n<p>{{ _(\"Your facility {0} has been {1} on the eLMN platform.\").format(facility_name, action) }}</p>\n<p><b>{{ _(\"Reason\") }}:</b> {{ reason }}</p>\n<p>{{ _(\"All user accounts linked to this facility have had their access revoked. If you believe this is in error, please contact MLN.\") }}</p>\n",
+  "subject": "Your facility {{ facility_name }} has been {{ action }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 09:36:16.851197",
+  "name": "facility_reactivated",
+  "response": null,
+  "response_html": "<p>{{ _(\"Dear\") }} {{ contact_person_name }},</p>\n<p>{{ _(\"Your facility {0} has been reactivated on the eLMN platform.\").format(facility_name) }}</p>\n<p>{{ _(\"User accounts linked to this facility have had their access restored.\") }}</p>\n",
+  "subject": "Your facility {{ facility_name }} has been reactivated",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 14:17:00.141898",
+  "name": "facility_account_activation",
+  "response": null,
+  "response_html": "<p>{{ _(\"Dear\") }} {{ contact_person_name }},</p>\n<p>{{ _(\"Your eLMN account for {0} is ready to be activated.\").format(facility_name) }}</p>\n<p><a class=\"btn btn-primary\" href=\"{{ link }}\">{{ _(\"Activate your account\") }}</a></p>\n<p>{{ _(\"You'll be asked to set a password to complete activation.\") }}</p>\n",
+  "subject": "Activate your eLMN account for {{ facility_name }}",
+  "use_html": 1
+ }
+]

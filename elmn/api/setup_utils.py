@@ -1,6 +1,4 @@
 import frappe
-import os
-import json
 
 
 def clear_workspaces():

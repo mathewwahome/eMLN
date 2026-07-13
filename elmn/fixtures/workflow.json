@@ -4,7 +4,7 @@
   "doctype": "Workflow",
   "document_type": "Facility",
   "is_active": 1,
-  "modified": "2026-07-12 22:00:00.000000",
+  "modified": "2026-07-12 22:00:00",
   "name": "Facility Workflow",
   "override_status": 0,
   "send_email_alert": 0,

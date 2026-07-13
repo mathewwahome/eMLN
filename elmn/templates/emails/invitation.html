@@ -1,0 +1,18 @@
+<p>{{ _("Dear") }} {{ facility_legal_name }} {{ _("team") }},</p>
+<p>{{ _("The Medicines Logistics Network (MLN) has invited your facility to register on the eLMN platform.") }}</p>
+{% if custom_message %}
+<p>{{ custom_message }}</p>
+{% endif %}
+<p><a class="btn btn-primary" href="{{ link }}">{{ _("Start your registration") }}</a></p>
+<p>{{ _("Please have the following documents ready to upload:") }}</p>
+<ul>
+	<li>{{ _("Certificate of Registration") }}</li>
+	<li>{{ _("Tax Compliance Certificate") }}</li>
+	<li>{{ _("Pharmacy Licence") }}</li>
+</ul>
+<p>{{ _("Once submitted, review typically takes about {0} day(s).").format(expected_processing_days) }}</p>
+<p>
+	{{ _("Questions? Contact MLN") }}
+	{% if support_email %}at <a href="mailto:{{ support_email }}">{{ support_email }}</a>{% endif %}
+	{% if support_phone %}({{ support_phone }}){% endif %}.
+</p>

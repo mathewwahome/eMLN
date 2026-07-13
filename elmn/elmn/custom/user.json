@@ -1,0 +1,19 @@
+{
+ "custom_fields": [
+  {
+   "dt": "User",
+   "fieldname": "custom_facility",
+   "fieldtype": "Link",
+   "options": "Facility",
+   "label": "Facility",
+   "insert_after": "role_profile_name",
+   "description": "Facility this user account belongs to (facility administrators and staff).",
+   "module": "eLMN"
+  }
+ ],
+ "custom_perms": [],
+ "doctype": "User",
+ "links": [],
+ "property_setters": [],
+ "sync_on_migrate": 1
+}
