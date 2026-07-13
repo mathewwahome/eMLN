@@ -3,8 +3,8 @@
   "docstatus": 0,
   "doctype": "Workflow",
   "document_type": "Facility",
-  "is_active": 0,
-  "modified": "2026-07-09 08:06:21.434763",
+  "is_active": 1,
+  "modified": "2026-07-12 22:00:00.000000",
   "name": "Facility Workflow",
   "override_status": 0,
   "send_email_alert": 0,
@@ -21,8 +21,8 @@
     "parenttype": "Workflow",
     "send_email": 1,
     "state": "Draft",
-    "update_field": null,
-    "update_value": null,
+    "update_field": "registration_status",
+    "update_value": "Pending verification",
     "workflow_builder_id": "1"
    },
    {
@@ -37,8 +37,8 @@
     "parenttype": "Workflow",
     "send_email": 1,
     "state": "Registration Officer",
-    "update_field": null,
-    "update_value": null,
+    "update_field": "registration_status",
+    "update_value": "Pending verification",
     "workflow_builder_id": "3"
    },
    {
@@ -53,8 +53,8 @@
     "parenttype": "Workflow",
     "send_email": 1,
     "state": "Need Clarification",
-    "update_field": null,
-    "update_value": null,
+    "update_field": "registration_status",
+    "update_value": "Need Clarification",
     "workflow_builder_id": "4"
    },
    {
@@ -69,8 +69,8 @@
     "parenttype": "Workflow",
     "send_email": 1,
     "state": "Rejected",
-    "update_field": null,
-    "update_value": null,
+    "update_field": "registration_status",
+    "update_value": "Rejected",
     "workflow_builder_id": "5"
    },
    {
@@ -85,8 +85,8 @@
     "parenttype": "Workflow",
     "send_email": 1,
     "state": "Approved",
-    "update_field": null,
-    "update_value": null,
+    "update_field": "registration_status",
+    "update_value": "Approved",
     "workflow_builder_id": "6"
    }
   ],

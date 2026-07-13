@@ -143,13 +143,14 @@ after_migrate = [
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
-# }
+doc_events = {
+	"Facility": {
+		"on_update": "elmn.api.notification.facility.on_facility_update"
+	},
+	"User": {
+		"on_update": "elmn.api.notification.facility.on_user_update"
+	}
+}
 
 # Scheduled Tasks
 # ---------------
