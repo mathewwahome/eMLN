@@ -1,0 +1,36 @@
+{
+ "custom_fields": [
+  {
+   "dt": "Item",
+   "fieldname": "pack_size",
+   "fieldtype": "Data",
+   "insert_after": "stock_uom",
+   "label": "Pack Size",
+   "module": "eLMN",
+   "reqd": 1
+  },
+  {
+   "dt": "Item",
+   "description": "Therapeutic classification of this commodity, if applicable.",
+   "fieldname": "therapeutic_class",
+   "fieldtype": "Link",
+   "insert_after": "brand",
+   "label": "Therapeutic Class",
+   "module": "eLMN",
+   "options": "Therapeutic Class"
+  },
+  {
+   "dt": "Item",
+   "fieldname": "storage_requirements",
+   "fieldtype": "Small Text",
+   "insert_after": "description",
+   "label": "Storage Requirements",
+   "module": "eLMN"
+  }
+ ],
+ "custom_perms": [],
+ "doctype": "Item",
+ "links": [],
+ "property_setters": [],
+ "sync_on_migrate": 1
+}

@@ -290,4 +290,5 @@ fixtures = [
 			]
 		],
 	},
+	"Custom DocPerm",
 ]

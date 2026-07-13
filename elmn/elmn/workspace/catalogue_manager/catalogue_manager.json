@@ -1,0 +1,78 @@
+{
+ "charts": [
+  {
+   "chart_name": "Items by Item Group",
+   "label": "Items by Item Group"
+  },
+  {
+   "chart_name": "Items Created Over Time",
+   "label": "Items Created Over Time"
+  }
+ ],
+ "content": "[{\"id\": \"CatMgrHdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\">Catalogue Manager</span>\", \"col\": 12}}, {\"id\": \"CatMgrShrt1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Item\", \"col\": 4}}, {\"id\": \"CatMgrShrt2\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Item Group\", \"col\": 4}}, {\"id\": \"CatMgrShrt3\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"UOM\", \"col\": 4}}, {\"id\": \"CatMgrChart1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Items by Item Group\", \"col\": 6}}, {\"id\": \"CatMgrChart2\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Items Created Over Time\", \"col\": 6}}, {\"id\": \"CatMgrShrt4\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Therapeutic Class\", \"col\": 4}}]",
+ "creation": "2026-07-13 17:00:00",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "assets",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Catalogue Manager",
+ "links": [],
+ "modified": "2026-07-13 21:38:30.449707",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Catalogue Manager",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Catalogue Manager"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 26.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Item",
+   "link_to": "Item",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Item Group",
+   "link_to": "Item Group",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "UOM",
+   "link_to": "UOM",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Therapeutic Class",
+   "link_to": "Therapeutic Class",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Catalogue Manager"
+}
