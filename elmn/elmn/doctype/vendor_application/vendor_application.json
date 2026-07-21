@@ -1,0 +1,313 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-07-21 10:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "status",
+  "draft_token",
+  "draft_expires_on",
+  "draft_expiry_warning_sent",
+  "vendor_type",
+  "entity_details_section",
+  "legal_entity_name",
+  "trading_name",
+  "country_of_incorporation",
+  "company_registration_number",
+  "column_break_reg",
+  "registered_address",
+  "page_break_contact",
+  "primary_contact_section",
+  "primary_contact_name",
+  "primary_contact_role",
+  "column_break_contact",
+  "primary_contact_email",
+  "primary_contact_phone",
+  "page_break_product_scope",
+  "product_scope_section",
+  "commodities",
+  "page_break_banking",
+  "banking_details_section",
+  "bank_name",
+  "branch_name",
+  "column_break_bank",
+  "account_name",
+  "account_number",
+  "swift_bic_code",
+  "page_break_documents",
+  "documents_section",
+  "documents"
+ ],
+ "fields": [
+  {
+   "default": "VEN-.YYYY.-.MM.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "VEN-.YYYY.-.MM.-",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "default": "Pending Submission",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nPending Submission\nExpired",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "description": "Secret token used in the draft resume link emailed to the applicant.",
+   "fieldname": "draft_token",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "no_copy": 1,
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "description": "Draft becomes unresumable after this date/time.",
+   "fieldname": "draft_expires_on",
+   "fieldtype": "Datetime",
+   "hidden": 1,
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "description": "Set once the expiry warning email has been sent for the current draft period, to avoid sending it more than once.",
+   "fieldname": "draft_expiry_warning_sent",
+   "fieldtype": "Check",
+   "hidden": 1,
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "description": "Classification is configurable by MLN admin under Vendor Type.",
+   "fieldname": "vendor_type",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vendor type",
+   "options": "Vendor Type",
+   "reqd": 1
+  },
+  {
+   "fieldname": "entity_details_section",
+   "fieldtype": "Section Break",
+   "label": "Entity Details"
+  },
+  {
+   "fieldname": "legal_entity_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Legal entity name",
+   "reqd": 1
+  },
+  {
+   "description": "Only required if different from the legal entity name.",
+   "fieldname": "trading_name",
+   "fieldtype": "Data",
+   "label": "Trading name (if different)"
+  },
+  {
+   "fieldname": "country_of_incorporation",
+   "fieldtype": "Link",
+   "label": "Country of incorporation",
+   "options": "Country",
+   "reqd": 1
+  },
+  {
+   "fieldname": "company_registration_number",
+   "fieldtype": "Data",
+   "label": "Company registration number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_reg",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "registered_address",
+   "fieldtype": "Small Text",
+   "label": "Registered address",
+   "reqd": 1
+  },
+  {
+   "fieldname": "page_break_contact",
+   "fieldtype": "Page Break"
+  },
+  {
+   "fieldname": "primary_contact_section",
+   "fieldtype": "Section Break",
+   "label": "Primary Contact"
+  },
+  {
+   "fieldname": "primary_contact_name",
+   "fieldtype": "Data",
+   "label": "Primary contact name",
+   "reqd": 1
+  },
+  {
+   "fieldname": "primary_contact_role",
+   "fieldtype": "Data",
+   "label": "Primary contact role",
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_contact",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "primary_contact_email",
+   "fieldtype": "Data",
+   "label": "Primary contact email",
+   "options": "Email",
+   "reqd": 1
+  },
+  {
+   "fieldname": "primary_contact_phone",
+   "fieldtype": "Data",
+   "label": "Primary contact phone",
+   "options": "Phone",
+   "reqd": 1
+  },
+  {
+   "fieldname": "page_break_product_scope",
+   "fieldtype": "Page Break"
+  },
+  {
+   "fieldname": "product_scope_section",
+   "fieldtype": "Section Break",
+   "label": "Product Scope"
+  },
+  {
+   "description": "Select the commodity categories and commodities you supply from the MLN catalogue taxonomy, with regulatory registration numbers where applicable.",
+   "fieldname": "commodities",
+   "fieldtype": "Table",
+   "label": "Commodities supplied",
+   "options": "Vendor Application Commodity"
+  },
+  {
+   "fieldname": "page_break_banking",
+   "fieldtype": "Page Break"
+  },
+  {
+   "description": "Restricted to Finance roles: used to configure payment routing once this vendor is approved.",
+   "fieldname": "banking_details_section",
+   "fieldtype": "Section Break",
+   "label": "Banking Details",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "bank_name",
+   "fieldtype": "Data",
+   "label": "Bank name",
+   "permlevel": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "branch_name",
+   "fieldtype": "Data",
+   "label": "Branch name",
+   "permlevel": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_bank",
+   "fieldtype": "Column Break",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "account_name",
+   "fieldtype": "Data",
+   "label": "Account name",
+   "permlevel": 1,
+   "reqd": 1
+  },
+  {
+   "description": "Alphanumeric, 6-34 characters.",
+   "fieldname": "account_number",
+   "fieldtype": "Data",
+   "label": "Account number",
+   "permlevel": 1,
+   "reqd": 1
+  },
+  {
+   "description": "For international suppliers only.",
+   "fieldname": "swift_bic_code",
+   "fieldtype": "Data",
+   "label": "SWIFT/BIC code",
+   "permlevel": 1
+  },
+  {
+   "fieldname": "page_break_documents",
+   "fieldtype": "Page Break"
+  },
+  {
+   "fieldname": "documents_section",
+   "fieldtype": "Section Break",
+   "label": "Supporting Documents"
+  },
+  {
+   "description": "Upload each required document from the list, plus any optional supporting evidence. Required documents depend on the vendor type selected above.",
+   "fieldname": "documents",
+   "fieldtype": "Table",
+   "label": "Documents",
+   "options": "Vendor Application Document"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-21 10:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Vendor Application",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Procurement Officer"
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "System Manager",
+   "write": 1
+  },
+  {
+   "permlevel": 1,
+   "read": 1,
+   "role": "Finance Officer",
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

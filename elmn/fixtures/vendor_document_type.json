@@ -1,0 +1,72 @@
+[
+ {
+  "allowed_file_types": "pdf,jpg,jpeg,png",
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Document Type",
+  "document_name": "Certificate of Incorporation",
+  "is_mandatory_default": 1,
+  "max_file_size_mb": 5,
+  "name": "Certificate of Incorporation"
+ },
+ {
+  "allowed_file_types": "pdf,jpg,jpeg,png",
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Document Type",
+  "document_name": "Business Registration Certificate",
+  "is_mandatory_default": 1,
+  "max_file_size_mb": 5,
+  "name": "Business Registration Certificate"
+ },
+ {
+  "allowed_file_types": "pdf,jpg,jpeg,png",
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Document Type",
+  "document_name": "Tax Compliance Certificate",
+  "is_mandatory_default": 1,
+  "max_file_size_mb": 5,
+  "name": "Tax Compliance Certificate"
+ },
+ {
+  "allowed_file_types": "pdf,jpg,jpeg,png",
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Document Type",
+  "document_name": "Proof of Banking Details",
+  "is_mandatory_default": 1,
+  "max_file_size_mb": 5,
+  "name": "Proof of Banking Details"
+ },
+ {
+  "allowed_file_types": "pdf,jpg,jpeg,png",
+  "description": "Required for vendor types whose products are subject to regulatory approval (see Vendor Type configuration).",
+  "docstatus": 0,
+  "doctype": "Vendor Document Type",
+  "document_name": "Product Licences / Regulatory Approvals",
+  "is_mandatory_default": 0,
+  "max_file_size_mb": 10,
+  "name": "Product Licences / Regulatory Approvals"
+ },
+ {
+  "allowed_file_types": "pdf,jpg,jpeg,png",
+  "description": "Good Manufacturing Practice certificate; required for Manufacturer vendor type.",
+  "docstatus": 0,
+  "doctype": "Vendor Document Type",
+  "document_name": "GMP Certificate",
+  "is_mandatory_default": 0,
+  "max_file_size_mb": 10,
+  "name": "GMP Certificate"
+ },
+ {
+  "allowed_file_types": "pdf,jpg,jpeg,png,doc,docx",
+  "description": "Any other supporting evidence not covered by the document types above.",
+  "docstatus": 0,
+  "doctype": "Vendor Document Type",
+  "document_name": "Other Supporting Document",
+  "is_mandatory_default": 0,
+  "max_file_size_mb": 10,
+  "name": "Other Supporting Document"
+ }
+]

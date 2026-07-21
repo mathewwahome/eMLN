@@ -2,29 +2,8 @@ import frappe
 from frappe import _
 
 from elmn.api.emails import send_templated_email
-
-
-def _users_with_role(role):
-	user_names = frappe.get_all(
-		"Has Role", filters={"role": role, "parenttype": "User"}, pluck="parent"
-	)
-	return frappe.get_all(
-		"User", filters={"name": ["in", user_names], "enabled": 1}, fields=["name", "email"]
-	)
-
-
-def _create_notification_log(user_names, subject, facility):
-	for user in user_names:
-		frappe.get_doc(
-			{
-				"doctype": "Notification Log",
-				"for_user": user,
-				"subject": subject,
-				"type": "Alert",
-				"document_type": facility.doctype,
-				"document_name": facility.name,
-			}
-		).insert(ignore_permissions=True)
+from elmn.api.notification import create_notification_log as _create_notification_log
+from elmn.api.notification import users_with_role as _users_with_role
 
 
 def notify_registration_officer(facility):

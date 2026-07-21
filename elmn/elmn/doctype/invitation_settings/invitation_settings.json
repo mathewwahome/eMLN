@@ -6,6 +6,8 @@
  "field_order": [
   "default_expiry_days",
   "expected_processing_days",
+  "draft_expiry_days",
+  "draft_expiry_warning_days",
   "column_break_settings",
   "support_email",
   "support_phone"
@@ -25,6 +27,22 @@
    "fieldname": "expected_processing_days",
    "fieldtype": "Int",
    "label": "Expected processing time (days)",
+   "reqd": 1
+  },
+  {
+   "default": "14",
+   "description": "Number of days a vendor application draft remains resumable before it expires.",
+   "fieldname": "draft_expiry_days",
+   "fieldtype": "Int",
+   "label": "Vendor draft expiry (days)",
+   "reqd": 1
+  },
+  {
+   "default": "3",
+   "description": "Send a warning email this many days before a vendor application draft expires.",
+   "fieldname": "draft_expiry_warning_days",
+   "fieldtype": "Int",
+   "label": "Vendor draft expiry warning (days before)",
    "reqd": 1
   },
   {

@@ -1,0 +1,61 @@
+[
+ {
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Type",
+  "vendor_type_name": "Manufacturer",
+  "name": "Manufacturer",
+  "required_document_types": [
+   {
+    "doctype": "Vendor Type Required Document",
+    "document_type": "Product Licences / Regulatory Approvals",
+    "parentfield": "required_document_types",
+    "parenttype": "Vendor Type"
+   },
+   {
+    "doctype": "Vendor Type Required Document",
+    "document_type": "GMP Certificate",
+    "parentfield": "required_document_types",
+    "parenttype": "Vendor Type"
+   }
+  ]
+ },
+ {
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Type",
+  "vendor_type_name": "Distributor",
+  "name": "Distributor",
+  "required_document_types": [
+   {
+    "doctype": "Vendor Type Required Document",
+    "document_type": "Product Licences / Regulatory Approvals",
+    "parentfield": "required_document_types",
+    "parenttype": "Vendor Type"
+   }
+  ]
+ },
+ {
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Type",
+  "vendor_type_name": "Importer",
+  "name": "Importer",
+  "required_document_types": [
+   {
+    "doctype": "Vendor Type Required Document",
+    "document_type": "Product Licences / Regulatory Approvals",
+    "parentfield": "required_document_types",
+    "parenttype": "Vendor Type"
+   }
+  ]
+ },
+ {
+  "description": null,
+  "docstatus": 0,
+  "doctype": "Vendor Type",
+  "vendor_type_name": "Agent",
+  "name": "Agent",
+  "required_document_types": []
+ }
+]

@@ -1,0 +1,15 @@
+<p>{{ _("Dear") }} {{ primary_contact_name }},</p>
+<p>{{ _("We've received your vendor registration application for {0}.").format(legal_entity_name) }}</p>
+<p>{{ _("Reference number") }}: <b>{{ reference_number }}</b></p>
+<p>{{ _("Submission date") }}: {{ submission_date }}</p>
+<p>{{ _("Documents received") }}:</p>
+<ul>
+{%- for document_name in document_names %}
+	<li>{{ document_name }}</li>
+{%- endfor %}
+</ul>
+<p>{{ _("Expected review timeline: about {0} day(s).").format(expected_processing_days) }}</p>
+<p>{{ _("We will email you once a decision has been made.") }}</p>
+{% if support_contact %}
+<p>{{ _("Questions? Contact MLN at {0}.").format(support_contact) }}</p>
+{% endif %}

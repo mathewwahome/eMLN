@@ -164,7 +164,8 @@ doc_events = {
 
 scheduler_events = {
 	"daily": [
-		"elmn.api.catalogue.apply_due_retirements"
+		"elmn.api.catalogue.apply_due_retirements",
+		"elmn.api.vendor.send_draft_expiry_notices",
 	],
 }
 
@@ -259,9 +260,11 @@ fixtures = [
 	"Workflow State",
 	"Workflow Action",
 	"Facility Level",
+	"Vendor Type",
+	"Vendor Document Type",
 	{
 		"doctype": "Web Form",
-		"filters": [["name", "=", "facility-registration"]],
+		"filters": [["name", "in", ["facility-registration", "vendor-registration"]]],
 	},
 	{
 		"doctype": "Email Template",
@@ -273,6 +276,10 @@ fixtures = [
 					"invitation",
 					"invitation_cancelled",
 					"submission_confirmation",
+					"vendor_submission_confirmation",
+					"vendor_submission_pending_review",
+					"vendor_draft_saved",
+					"vendor_draft_expiry_warning",
 					"approval",
 					"registration_pending",
 					"rejection",
@@ -291,6 +298,8 @@ fixtures = [
 	},
 	{
 		"doctype": "Custom DocPerm",
-		"filters": [["role", "in", ["Catalogue Manager", "Administrator", "Facility Procurement Officer"]]],
+		"filters": [
+			["role", "in", ["Catalogue Manager", "Administrator", "Facility Procurement Officer", "Guest"]]
+		],
 	},
 ]
