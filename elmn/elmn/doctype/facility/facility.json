@@ -149,8 +149,8 @@
    "read_only": 1
   },
   {
-   "description": "Reason provided by the Registration Officer when rejecting this registration.",
    "depends_on": "eval:doc.workflow_state==\"Rejected\"",
+   "description": "Reason provided by the Registration Officer when rejecting this registration.",
    "fieldname": "rejection_reason",
    "fieldtype": "Small Text",
    "label": "Rejection reason",
@@ -322,7 +322,7 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2026-07-12 22:00:00.000000",
+ "modified": "2026-07-21 09:51:34.395485",
  "modified_by": "Administrator",
  "module": "eLMN",
  "name": "Facility",
@@ -370,9 +370,12 @@
  ],
  "row_format": "Dynamic",
  "rows_threshold_for_grid_search": 20,
+ "search_fields": "facility_name",
+ "show_title_field_in_link": 1,
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
+ "title_field": "facility_name",
  "track_changes": 1,
  "track_views": 1
 }
