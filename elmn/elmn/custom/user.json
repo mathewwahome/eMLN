@@ -9,6 +9,17 @@
    "insert_after": "role_profile_name",
    "description": "Facility this user account belongs to (facility administrators and staff).",
    "module": "eLMN"
+  },
+  {
+   "dt": "User",
+   "fieldname": "custom_facility_name",
+   "fieldtype": "Data",
+   "fetch_from": "custom_facility.facility_name",
+   "read_only": 1,
+   "label": "Facility Name",
+   "insert_after": "custom_facility",
+   "description": "Mirrors the linked Facility's name, purely so Group By dashboard charts have a readable label to group on instead of the Facility's docname.",
+   "module": "eLMN"
   }
  ],
  "custom_perms": [],

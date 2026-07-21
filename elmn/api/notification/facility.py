@@ -195,3 +195,80 @@ def on_user_update(doc, method=None):
 		facility_name,
 		{"account_status": "Active", "facility_status": 1},
 	)
+
+
+def validate_employee_facility_user(doc, method=None):
+	"""Enforce that Facility + Facility Role are set whenever an Employee is marked a Facility User."""
+	if not doc.custom_is_facility_user:
+		return
+	if not doc.custom_facility:
+		frappe.throw(_("Facility is required when 'Is Facility User' is checked."))
+	if not doc.custom_facility_role:
+		frappe.throw(_("Facility Role is required when 'Is Facility User' is checked."))
+
+
+def on_employee_update(doc, method=None):
+	"""Provision (or revoke) the linked User's Facility access when the Facility User flag/fields change."""
+	if not doc.has_value_changed("custom_is_facility_user") and not doc.has_value_changed(
+		"custom_facility"
+	) and not doc.has_value_changed("custom_facility_role"):
+		return
+
+	if doc.custom_is_facility_user:
+		_provision_facility_employee_user(doc)
+	elif doc.has_value_changed("custom_is_facility_user"):
+		_revoke_facility_employee_user(doc)
+
+
+def _provision_facility_employee_user(doc):
+	linked_user = doc.user_id and frappe.db.get_value("User", doc.user_id, "custom_facility")
+	if linked_user == doc.custom_facility:
+		return
+
+	email = doc.user_id or doc.company_email or doc.personal_email or doc.prefered_email
+	if not email:
+		frappe.throw(
+			_("{0} needs a Company Email, Personal Email, or linked User before being marked as a Facility User.").format(
+				doc.employee_name or doc.name
+			)
+		)
+
+	user_name = doc.user_id or frappe.db.get_value("User", email, "name")
+	is_new_user = not user_name
+
+	if is_new_user:
+		user = frappe.get_doc(
+			{
+				"doctype": "User",
+				"email": email,
+				"first_name": doc.employee_name or email,
+				"user_type": "System User",
+				"send_welcome_email": 0,
+			}
+		)
+		user.append("roles", {"role": doc.custom_facility_role})
+		user.insert(ignore_permissions=True)
+		user_name = user.name
+	else:
+		user = frappe.get_doc("User", user_name)
+		if not any(r.role == doc.custom_facility_role for r in user.roles):
+			user.append("roles", {"role": doc.custom_facility_role})
+			user.save(ignore_permissions=True)
+
+	if doc.user_id != user_name:
+		frappe.db.set_value("Employee", doc.name, "user_id", user_name)
+
+	frappe.db.set_value("User", user_name, "custom_facility", doc.custom_facility)
+
+	if is_new_user:
+		user_doc = frappe.get_doc("User", user_name)
+		facility_name = frappe.db.get_value("Facility", doc.custom_facility, "facility_name") or doc.custom_facility
+		send_activation_email(user_doc, doc.employee_name, facility_name, doc.doctype, doc.name)
+
+
+def _revoke_facility_employee_user(doc):
+	if not doc.user_id:
+		return
+	if not frappe.db.get_value("User", doc.user_id, "custom_facility"):
+		return
+	frappe.db.set_value("User", doc.user_id, "custom_facility", None)

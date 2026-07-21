@@ -1,0 +1,18 @@
+{
+ "custom_fields": [
+  {
+   "dt": "Item Supplier",
+   "fieldname": "supply_priority",
+   "fieldtype": "Int",
+   "label": "Supply Priority",
+   "insert_after": "supplier",
+   "description": "Preferred order for sourcing this commodity from this supplier (1 = first choice).",
+   "module": "eLMN"
+  }
+ ],
+ "custom_perms": [],
+ "doctype": "Item Supplier",
+ "links": [],
+ "property_setters": [],
+ "sync_on_migrate": 1
+}

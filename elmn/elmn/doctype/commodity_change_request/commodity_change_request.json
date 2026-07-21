@@ -1,0 +1,467 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "format:CCR-{#####}",
+ "creation": "2026-07-13 20:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "change_type_section",
+  "change_type",
+  "item",
+  "column_break_change",
+  "status",
+  "commodity_details_section",
+  "item_code",
+  "item_name",
+  "item_group",
+  "stock_uom",
+  "column_break_details",
+  "pack_size",
+  "therapeutic_class",
+  "brand",
+  "description_section",
+  "description",
+  "strength_dosage_form",
+  "specifications",
+  "storage_requirements",
+  "commercial_section",
+  "default_unit_price",
+  "column_break_commercial",
+  "min_order_qty",
+  "max_order_qty",
+  "column_break_commercial_2",
+  "supplier",
+  "minimum_shelf_life_at_delivery",
+  "price_tax_treatment",
+  "suspend_section",
+  "suspension_reason",
+  "expected_duration_days",
+  "retire_section",
+  "retirement_reason",
+  "effective_date",
+  "replacement_item",
+  "comparison_section",
+  "comparison_summary",
+  "before_snapshot",
+  "approval_section",
+  "clinical_reviewed_by",
+  "clinical_reviewed_on",
+  "clinical_comment",
+  "column_break_approval",
+  "procurement_reviewed_by",
+  "procurement_reviewed_on",
+  "procurement_comment",
+  "rejection_section",
+  "rejected_by",
+  "rejected_on",
+  "rejected_at_stage",
+  "rejection_reason",
+  "closure_note"
+ ],
+ "fields": [
+  {
+   "fieldname": "change_type_section",
+   "fieldtype": "Section Break",
+   "label": "Change Type"
+  },
+  {
+   "fieldname": "change_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Change Type",
+   "options": "Add New\nUpdate\nSuspend\nRetire",
+   "reqd": 1
+  },
+  {
+   "depends_on": "eval:doc.change_type!=\"Add New\"",
+   "description": "The existing commodity this change applies to. Set automatically once an Add New request is approved and the Item is created.",
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Item",
+   "mandatory_depends_on": "eval:doc.change_type!=\"Add New\"",
+   "options": "Item",
+   "read_only_depends_on": "eval:doc.change_type==\"Add New\""
+  },
+  {
+   "fieldname": "column_break_change",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Draft",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Draft\nPending Clinical Review\nPending Procurement Review\nApproved\nRejected\nClosed - Unresolved",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.change_type==\"Add New\"||doc.change_type==\"Update\"",
+   "depends_on": "eval:doc.change_type==\"Add New\"||doc.change_type==\"Update\"",
+   "fieldname": "commodity_details_section",
+   "fieldtype": "Section Break",
+   "label": "Commodity Details"
+  },
+  {
+   "description": "Becomes the new Item's docname once approved. Not editable for Update (identity of the existing commodity doesn't change).",
+   "fieldname": "item_code",
+   "fieldtype": "Data",
+   "label": "Commodity code",
+   "read_only_depends_on": "eval:doc.change_type==\"Update\""
+  },
+  {
+   "fieldname": "item_name",
+   "fieldtype": "Data",
+   "label": "Commodity name"
+  },
+  {
+   "description": "Add New only - category/class is not an editable field on Update.",
+   "depends_on": "eval:doc.change_type==\"Add New\"",
+   "fieldname": "item_group",
+   "fieldtype": "Link",
+   "label": "Category / Class",
+   "options": "Item Group"
+  },
+  {
+   "description": "Add New only - unit of measure is not an editable field on Update.",
+   "depends_on": "eval:doc.change_type==\"Add New\"",
+   "fieldname": "stock_uom",
+   "fieldtype": "Link",
+   "label": "Unit of Measure",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "column_break_details",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "pack_size",
+   "fieldtype": "Data",
+   "label": "Pack Size"
+  },
+  {
+   "description": "Add New only - therapeutic class is not an editable field on Update.",
+   "depends_on": "eval:doc.change_type==\"Add New\"",
+   "fieldname": "therapeutic_class",
+   "fieldtype": "Link",
+   "label": "Therapeutic Class",
+   "options": "Therapeutic Class"
+  },
+  {
+   "description": "Add New only.",
+   "depends_on": "eval:doc.change_type==\"Add New\"",
+   "fieldname": "brand",
+   "fieldtype": "Link",
+   "label": "Brand",
+   "options": "Brand"
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Add New\"||doc.change_type==\"Update\"",
+   "fieldname": "description_section",
+   "fieldtype": "Section Break",
+   "label": "Description & Specifications"
+  },
+  {
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "label": "Description"
+  },
+  {
+   "fieldname": "strength_dosage_form",
+   "fieldtype": "Data",
+   "label": "Strength / Dosage Form"
+  },
+  {
+   "fieldname": "specifications",
+   "fieldtype": "Small Text",
+   "label": "Specifications"
+  },
+  {
+   "fieldname": "storage_requirements",
+   "fieldtype": "Small Text",
+   "label": "Storage Requirements"
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Add New\"||doc.change_type==\"Update\"",
+   "fieldname": "commercial_section",
+   "fieldtype": "Section Break",
+   "label": "Commercial"
+  },
+  {
+   "fieldname": "default_unit_price",
+   "fieldtype": "Currency",
+   "label": "Default Unit Price"
+  },
+  {
+   "fieldname": "column_break_commercial",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "min_order_qty",
+   "fieldtype": "Float",
+   "label": "Minimum Order Qty"
+  },
+  {
+   "fieldname": "max_order_qty",
+   "fieldtype": "Float",
+   "label": "Maximum Order Qty"
+  },
+  {
+   "fieldname": "column_break_commercial_2",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Supplier reference",
+   "options": "Supplier"
+  },
+  {
+   "description": "Add New only.",
+   "depends_on": "eval:doc.change_type==\"Add New\"",
+   "fieldname": "minimum_shelf_life_at_delivery",
+   "fieldtype": "Int",
+   "label": "Min. Shelf Life at Delivery (days)"
+  },
+  {
+   "description": "Add New only.",
+   "depends_on": "eval:doc.change_type==\"Add New\"",
+   "fieldname": "price_tax_treatment",
+   "fieldtype": "Select",
+   "label": "Price Tax Treatment",
+   "options": "\nTax Inclusive\nTax Exclusive"
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Suspend\"",
+   "fieldname": "suspend_section",
+   "fieldtype": "Section Break",
+   "label": "Suspension Details"
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Suspend\"",
+   "fieldname": "suspension_reason",
+   "fieldtype": "Small Text",
+   "label": "Suspension reason",
+   "mandatory_depends_on": "eval:doc.change_type==\"Suspend\""
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Suspend\"",
+   "description": "Optional - how many days the item is expected to remain suspended.",
+   "fieldname": "expected_duration_days",
+   "fieldtype": "Int",
+   "label": "Expected suspension duration (days)"
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Retire\"",
+   "fieldname": "retire_section",
+   "fieldtype": "Section Break",
+   "label": "Retirement Details"
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Retire\"",
+   "fieldname": "retirement_reason",
+   "fieldtype": "Small Text",
+   "label": "Retirement reason",
+   "mandatory_depends_on": "eval:doc.change_type==\"Retire\""
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Retire\"",
+   "description": "Today or a future date. If future-dated, the retirement is applied automatically once due.",
+   "fieldname": "effective_date",
+   "fieldtype": "Date",
+   "label": "Effective date",
+   "mandatory_depends_on": "eval:doc.change_type==\"Retire\""
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Retire\"",
+   "description": "Optional - suggested alternative commodity for in-flight orders affected by this retirement.",
+   "fieldname": "replacement_item",
+   "fieldtype": "Link",
+   "label": "Replacement item",
+   "options": "Item"
+  },
+  {
+   "collapsible": 1,
+   "depends_on": "eval:doc.change_type==\"Update\"",
+   "fieldname": "comparison_section",
+   "fieldtype": "Section Break",
+   "label": "Proposed vs Current"
+  },
+  {
+   "depends_on": "eval:doc.change_type==\"Update\"",
+   "fieldname": "comparison_summary",
+   "fieldtype": "Text Editor",
+   "label": "Comparison",
+   "read_only": 1
+  },
+  {
+   "fieldname": "before_snapshot",
+   "fieldtype": "Code",
+   "hidden": 1,
+   "label": "Before snapshot",
+   "options": "JSON",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approval_section",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "clinical_reviewed_by",
+   "fieldtype": "Link",
+   "label": "Clinical reviewed by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "clinical_reviewed_on",
+   "fieldtype": "Datetime",
+   "label": "Clinical reviewed on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "clinical_comment",
+   "fieldtype": "Small Text",
+   "label": "Clinical comment",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_approval",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "procurement_reviewed_by",
+   "fieldtype": "Link",
+   "label": "Procurement reviewed by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "procurement_reviewed_on",
+   "fieldtype": "Datetime",
+   "label": "Procurement reviewed on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "procurement_comment",
+   "fieldtype": "Small Text",
+   "label": "Procurement comment",
+   "read_only": 1
+  },
+  {
+   "collapsible": 1,
+   "collapsible_depends_on": "eval:doc.status==\"Rejected\"||doc.status==\"Closed - Unresolved\"",
+   "fieldname": "rejection_section",
+   "fieldtype": "Section Break",
+   "label": "Rejection"
+  },
+  {
+   "fieldname": "rejected_by",
+   "fieldtype": "Link",
+   "label": "Rejected by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejected_on",
+   "fieldtype": "Datetime",
+   "label": "Rejected on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "rejected_at_stage",
+   "fieldtype": "Select",
+   "label": "Rejected at stage",
+   "options": "\nClinical\nProcurement",
+   "read_only": 1
+  },
+  {
+   "depends_on": "eval:doc.status==\"Rejected\"||doc.status==\"Closed - Unresolved\"",
+   "fieldname": "rejection_reason",
+   "fieldtype": "Small Text",
+   "label": "Rejection reason",
+   "mandatory_depends_on": "eval:doc.status==\"Rejected\""
+  },
+  {
+   "fieldname": "closure_note",
+   "fieldtype": "Small Text",
+   "label": "Closure note",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-13 23:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Commodity Change Request",
+ "naming_rule": "Expression",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Administrator",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Catalogue Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Clinical/Pharmacy Reviewer",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Procurement Officer",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

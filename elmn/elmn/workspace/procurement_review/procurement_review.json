@@ -1,0 +1,58 @@
+{
+ "charts": [
+  {
+   "chart_name": "Commodity Change Requests by Status",
+   "label": "Commodity Change Requests by Status"
+  }
+ ],
+ "content": "[{\"id\":\"ProcRevHdr1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Procurement Review</span>\",\"col\":12}},{\"id\":\"ProcRevShrt1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Commodity Change Request\",\"col\":4}},{\"id\":\"ProcRevShrt2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Purchase Order\",\"col\":4}},{\"id\":\"jOLXhtdSfm\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"ProcRevChart1\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Commodity Change Requests by Status\",\"col\":6}}]",
+ "creation": "2026-07-13 23:30:00",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "tool",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Procurement Review",
+ "links": [],
+ "modified": "2026-07-14 09:07:28.854885",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Procurement Review",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Procurement Officer"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 28.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Commodity Change Request",
+   "link_to": "Commodity Change Request",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Purchase Order",
+   "link_to": "Purchase Order",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Procurement Review"
+}

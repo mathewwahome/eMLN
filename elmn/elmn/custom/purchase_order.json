@@ -1,0 +1,30 @@
+{
+ "custom_fields": [
+  {
+   "dt": "Purchase Order",
+   "default": "0",
+   "description": "Set automatically when a commodity on this order is deactivated while the order is still active.",
+   "fieldname": "flagged_for_review",
+   "fieldtype": "Check",
+   "insert_after": "title",
+   "label": "Flagged for Review",
+   "module": "eLMN",
+   "read_only": 1
+  },
+  {
+   "dt": "Purchase Order",
+   "depends_on": "eval:doc.flagged_for_review",
+   "fieldname": "flag_reason",
+   "fieldtype": "Small Text",
+   "insert_after": "flagged_for_review",
+   "label": "Flag Reason",
+   "module": "eLMN",
+   "read_only": 1
+  }
+ ],
+ "custom_perms": [],
+ "doctype": "Purchase Order",
+ "links": [],
+ "property_setters": [],
+ "sync_on_migrate": 1
+}

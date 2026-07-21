@@ -43,7 +43,7 @@ app_license = "mit"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-# doctype_js = {"doctype" : "public/js/doctype.js"}
+doctype_js = {"Item": "public/js/item.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -149,29 +149,24 @@ doc_events = {
 	},
 	"User": {
 		"on_update": "elmn.api.notification.facility.on_user_update"
+	},
+	"Item": {
+		"on_update": "elmn.api.catalogue.on_item_update"
+	},
+	"Employee": {
+		"validate": "elmn.api.notification.facility.validate_employee_facility_user",
+		"on_update": "elmn.api.notification.facility.on_employee_update"
 	}
 }
 
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
-# 	"all": [
-# 		"elmn.tasks.all"
-# 	],
-# 	"daily": [
-# 		"elmn.tasks.daily"
-# 	],
-# 	"hourly": [
-# 		"elmn.tasks.hourly"
-# 	],
-# 	"weekly": [
-# 		"elmn.tasks.weekly"
-# 	],
-# 	"monthly": [
-# 		"elmn.tasks.monthly"
-# 	],
-# }
+scheduler_events = {
+	"daily": [
+		"elmn.api.catalogue.apply_due_retirements"
+	],
+}
 
 # Testing
 # -------
@@ -286,9 +281,16 @@ fixtures = [
 					"facility_offboarded",
 					"facility_reactivated",
 					"facility_account_activation",
+					"purchase_order_flagged",
+					"commodity_change_request_pending",
+					"commodity_change_request_approved",
+					"commodity_change_request_rejected",
 				],
 			]
 		],
 	},
-	"Custom DocPerm",
+	{
+		"doctype": "Custom DocPerm",
+		"filters": [["role", "in", ["Catalogue Manager", "Administrator", "Facility Procurement Officer"]]],
+	},
 ]

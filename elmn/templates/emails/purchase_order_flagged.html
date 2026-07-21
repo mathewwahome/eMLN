@@ -1,0 +1,8 @@
+<p>{{ _("The commodity {0} ({1}) was deactivated.").format(item_name, item_code) }}</p>
+<p><b>{{ _("Reason") }}:</b> {{ reason }}</p>
+<p>{{ _("The following active purchase order(s) reference this commodity and have been flagged for review:") }}</p>
+<ul>
+{% for po in purchase_orders %}
+	<li><a href="{{ po.url }}">{{ po.name }}</a></li>
+{% endfor %}
+</ul>

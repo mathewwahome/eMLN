@@ -1,0 +1,50 @@
+{
+ "charts": [
+  {
+   "chart_name": "Commodity Change Requests by Status",
+   "label": "Commodity Change Requests by Status"
+  }
+ ],
+ "content": "[{\"id\": \"ClinRevHdr1\", \"type\": \"header\", \"data\": {\"text\": \"<span class=\\\"h4\\\">Clinical & Pharmacy Review</span>\", \"col\": 12}}, {\"id\": \"ClinRevShrt1\", \"type\": \"shortcut\", \"data\": {\"shortcut_name\": \"Commodity Change Request\", \"col\": 4}}, {\"id\": \"ClinRevChart1\", \"type\": \"chart\", \"data\": {\"chart_name\": \"Commodity Change Requests by Status\", \"col\": 6}}]",
+ "creation": "2026-07-13 23:30:00.000000",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "icon": "tool",
+ "idx": 0,
+ "indicator_color": "",
+ "is_hidden": 0,
+ "label": "Clinical and Pharmacy Review",
+ "links": [],
+ "modified": "2026-07-13 23:30:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Clinical and Pharmacy Review",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [
+  {
+   "role": "Clinical/Pharmacy Reviewer"
+  },
+  {
+   "role": "System Manager"
+  }
+ ],
+ "sequence_id": 27.0,
+ "shortcuts": [
+  {
+   "color": "Blue",
+   "doc_view": "List",
+   "label": "Commodity Change Request",
+   "link_to": "Commodity Change Request",
+   "stats_filter": "[]",
+   "type": "DocType"
+  }
+ ],
+ "title": "Clinical and Pharmacy Review"
+}

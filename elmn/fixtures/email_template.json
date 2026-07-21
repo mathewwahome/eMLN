@@ -2,6 +2,36 @@
  {
   "docstatus": 0,
   "doctype": "Email Template",
+  "modified": "2026-07-13 22:38:56.451637",
+  "name": "commodity_change_request_pending",
+  "response": null,
+  "response_html": "<p>{{ _(\"A new commodity has been submitted for approval.\") }}</p>\n<ul>\n\t<li><b>{{ _(\"Commodity\") }}:</b> {{ item_name }} ({{ item_code }})</li>\n\t<li><b>{{ _(\"Requested by\") }}:</b> {{ requested_by }}</li>\n</ul>\n<p>{{ _(\"This requires approval from two different approvers before it becomes active.\") }}</p>\n<p><a href=\"{{ url }}\">{{ _(\"Review the request\") }}</a></p>\n",
+  "subject": "Commodity Change Request pending approval: {{ item_name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 22:38:56.706857",
+  "name": "commodity_change_request_approved",
+  "response": null,
+  "response_html": "<p>{{ _(\"Good news - your commodity change request has been fully approved.\") }}</p>\n<p><b>{{ _(\"Commodity\") }}:</b> {{ item_name }} ({{ item_code }})</p>\n<p>{{ _(\"It is now active and available for ordering and forecasting.\") }}</p>\n",
+  "subject": "Your commodity change request was approved: {{ item_name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 22:38:56.712450",
+  "name": "commodity_change_request_rejected",
+  "response": null,
+  "response_html": "<p>{{ _(\"Your commodity change request was not approved.\") }}</p>\n<p><b>{{ _(\"Commodity\") }}:</b> {{ item_name }} ({{ item_code }})</p>\n<p><b>{{ _(\"Reason\") }}:</b> {{ reason }}</p>\n",
+  "subject": "Your commodity change request was not approved: {{ item_name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
   "modified": "2026-07-13 09:46:56.724856",
   "name": "invitation",
   "response": null,
@@ -107,6 +137,16 @@
   "response": null,
   "response_html": "<p>{{ _(\"Dear\") }} {{ contact_person_name }},</p>\n<p>{{ _(\"Your eLMN account for {0} is ready to be activated.\").format(facility_name) }}</p>\n<p><a class=\"btn btn-primary\" href=\"{{ link }}\">{{ _(\"Activate your account\") }}</a></p>\n<p>{{ _(\"You'll be asked to set a password to complete activation.\") }}</p>\n",
   "subject": "Activate your eLMN account for {{ facility_name }}",
+  "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-13 22:02:03.748338",
+  "name": "purchase_order_flagged",
+  "response": null,
+  "response_html": "<p>{{ _(\"The commodity {0} ({1}) was deactivated.\").format(item_name, item_code) }}</p>\n<p><b>{{ _(\"Reason\") }}:</b> {{ reason }}</p>\n<p>{{ _(\"The following active purchase order(s) reference this commodity and have been flagged for review:\") }}</p>\n<ul>\n{% for po in purchase_orders %}\n\t<li><a href=\"{{ po.url }}\">{{ po.name }}</a></li>\n{% endfor %}\n</ul>\n",
+  "subject": "{{ purchase_orders|length }} active purchase order(s) flagged for review: commodity {{ item_name }} deactivated",
   "use_html": 1
  }
 ]
