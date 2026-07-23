@@ -262,9 +262,12 @@ fixtures = [
 	"Facility Level",
 	"Vendor Type",
 	"Vendor Document Type",
+	"Vendor Verification Check Type",
 	{
 		"doctype": "Web Form",
-		"filters": [["name", "in", ["facility-registration", "vendor-registration"]]],
+		"filters": [
+			["name", "in", ["facility-registration", "vendor-registration", "vendor-rfi-response"]]
+		],
 	},
 	{
 		"doctype": "Email Template",
@@ -280,6 +283,9 @@ fixtures = [
 					"vendor_submission_pending_review",
 					"vendor_draft_saved",
 					"vendor_draft_expiry_warning",
+					"vendor_rfi_raised",
+					"vendor_rfi_responded",
+					"vendor_approved",
 					"approval",
 					"registration_pending",
 					"rejection",

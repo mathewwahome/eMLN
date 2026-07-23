@@ -233,16 +233,18 @@
    "label": "Location Details"
   },
   {
-   "description": "Region where the facility is located.\nMust be selected from predefined Tanzania region list.",
+   "description": "Region where the facility is located.",
    "fieldname": "region",
-   "fieldtype": "Data",
-   "label": "Region"
+   "fieldtype": "Link",
+   "label": "Region",
+   "options": "Region"
   },
   {
-   "description": "District where the facility is located.\nDependent on Region selected",
+   "description": "District where the facility is located. Dependent on the Region selected.",
    "fieldname": "district",
-   "fieldtype": "Data",
-   "label": "District"
+   "fieldtype": "Link",
+   "label": "District",
+   "options": "District"
   },
   {
    "fieldname": "section_break_gwvn",

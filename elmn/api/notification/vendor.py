@@ -105,3 +105,97 @@ def notify_admin_of_new_submission(vendor_application):
 		reference_name=vendor_application.name,
 	)
 	create_notification_log([u.name for u in users], subject, vendor_application)
+
+
+def _rfi_response_url(rfi):
+	return get_url(f"/vendor-rfi-response?token={rfi.response_token}")
+
+
+def _notify_email_and_inapp(email, user_names_for_log, template, args, default_subject, doc):
+	if email:
+		send_templated_email(
+			template,
+			[email],
+			args,
+			default_subject=default_subject,
+			reference_doctype=doc.doctype,
+			reference_name=doc.name,
+		)
+	if user_names_for_log:
+		create_notification_log(user_names_for_log, default_subject, doc)
+
+
+def notify_rfi_raised(rfi):
+	vendor_application = frappe.get_doc("Vendor Application", rfi.vendor_application)
+	subject = _("MLN needs more information for your vendor application: {0}").format(
+		vendor_application.legal_entity_name
+	)
+
+
+	matching_user = frappe.db.get_value(
+		"User", {"email": vendor_application.primary_contact_email, "enabled": 1}, "name"
+	)
+
+	_notify_email_and_inapp(
+		vendor_application.primary_contact_email,
+		[matching_user] if matching_user else None,
+		"vendor_rfi_raised",
+		{
+			"primary_contact_name": vendor_application.primary_contact_name,
+			"legal_entity_name": vendor_application.legal_entity_name,
+			"reference_number": vendor_application.name,
+			"explanation": rfi.explanation,
+			"items": [row.description for row in rfi.items],
+			"response_deadline": format_date(rfi.response_deadline),
+			"response_url": _rfi_response_url(rfi),
+		},
+		subject,
+		rfi,
+	)
+
+
+def notify_rfi_responded(rfi):
+	if not rfi.raised_by:
+		return
+
+	subject = _("Vendor responded to your Request for Information: {0}").format(rfi.vendor_application)
+	recipient_email = frappe.db.get_value("User", rfi.raised_by, "email")
+	review_url = get_url(f"/app/vendor-rfi/{rfi.name}")
+
+	send_templated_email(
+		"vendor_rfi_responded",
+		[recipient_email] if recipient_email else [],
+		{
+			"reference_number": rfi.vendor_application,
+			"rfi_name": rfi.name,
+			"review_url": review_url,
+		},
+		default_subject=subject,
+		reference_doctype=rfi.doctype,
+		reference_name=rfi.name,
+	)
+	create_notification_log([rfi.raised_by], subject, rfi)
+
+
+def notify_approval(vendor_application, user_doc):
+	if not vendor_application.primary_contact_email:
+		return
+
+	user_doc.validate_reset_password()
+	link = user_doc._reset_password(send_email=False)
+
+	send_templated_email(
+		"vendor_approved",
+		[vendor_application.primary_contact_email],
+		{
+			"primary_contact_name": vendor_application.primary_contact_name,
+			"legal_entity_name": vendor_application.legal_entity_name,
+			"vendor_id": vendor_application.supplier,
+			"link": link,
+		},
+		default_subject=_("Your vendor application has been approved: {0}").format(
+			vendor_application.legal_entity_name
+		),
+		reference_doctype=vendor_application.doctype,
+		reference_name=vendor_application.name,
+	)

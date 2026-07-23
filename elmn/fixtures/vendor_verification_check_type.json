@@ -1,0 +1,29 @@
+[
+ {
+  "check_name": "Company Registration",
+  "description": "Verify the vendor's legal entity/company registration against the relevant companies registry.",
+  "docstatus": 0,
+  "doctype": "Vendor Verification Check Type",
+  "is_mandatory_default": 1,
+  "name": "Company Registration",
+  "verification_method": "Manual"
+ },
+ {
+  "check_name": "Tax Compliance Status",
+  "description": "Verify the vendor's tax compliance certificate/status against the tax authority.",
+  "docstatus": 0,
+  "doctype": "Vendor Verification Check Type",
+  "is_mandatory_default": 1,
+  "name": "Tax Compliance Status",
+  "verification_method": "Manual"
+ },
+ {
+  "check_name": "Regulatory Licence",
+  "description": "Verify any product licences or regulatory approvals declared by the vendor against the relevant regulator.",
+  "docstatus": 0,
+  "doctype": "Vendor Verification Check Type",
+  "is_mandatory_default": 1,
+  "name": "Regulatory Licence",
+  "verification_method": "Manual"
+ }
+]

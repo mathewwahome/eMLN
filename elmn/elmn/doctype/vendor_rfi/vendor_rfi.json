@@ -1,0 +1,170 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "naming_series:",
+ "creation": "2026-07-21 16:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "vendor_application",
+  "status",
+  "column_break_rfi_header",
+  "response_deadline",
+  "response_token",
+  "explanation_section",
+  "explanation",
+  "items_section",
+  "items",
+  "audit_section",
+  "raised_by",
+  "raised_on",
+  "column_break_audit",
+  "responded_on"
+ ],
+ "fields": [
+  {
+   "default": "RFI-.YYYY.-.MM.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "RFI-.YYYY.-.MM.-",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "vendor_application",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vendor Application",
+   "options": "Vendor Application",
+   "reqd": 1
+  },
+  {
+   "default": "Pending Response",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending Response\nResponded",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "column_break_rfi_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "response_deadline",
+   "fieldtype": "Date",
+   "in_list_view": 1,
+   "label": "Response deadline",
+   "reqd": 1
+  },
+  {
+   "description": "Secret token used in the response link emailed to the vendor.",
+   "fieldname": "response_token",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "no_copy": 1,
+   "read_only": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "explanation_section",
+   "fieldtype": "Section Break",
+   "label": "Explanation"
+  },
+  {
+   "description": "Explain to the vendor why this information is needed.",
+   "fieldname": "explanation",
+   "fieldtype": "Small Text",
+   "label": "Explanation",
+   "reqd": 1
+  },
+  {
+   "fieldname": "items_section",
+   "fieldtype": "Section Break",
+   "label": "Items Requested"
+  },
+  {
+   "fieldname": "items",
+   "fieldtype": "Table",
+   "label": "Items",
+   "options": "Vendor RFI Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "audit_section",
+   "fieldtype": "Section Break",
+   "label": "Audit"
+  },
+  {
+   "fieldname": "raised_by",
+   "fieldtype": "Link",
+   "label": "Raised by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "raised_on",
+   "fieldtype": "Datetime",
+   "label": "Raised on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_audit",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "responded_on",
+   "fieldtype": "Datetime",
+   "label": "Responded on",
+   "read_only": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-07-21 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Vendor RFI",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "read": 1,
+   "report": 1,
+   "write": 1,
+   "role": "Clinical/Pharmacy Reviewer"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "role": "Procurement Officer"
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

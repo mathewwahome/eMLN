@@ -1,0 +1,61 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "creation": "2026-07-21 16:00:00.000000",
+ "doctype": "DocType",
+ "editable_grid": 1,
+ "engine": "InnoDB",
+ "field_order": [
+  "description",
+  "response_text",
+  "response_attachment",
+  "responded"
+ ],
+ "fields": [
+  {
+   "columns": 4,
+   "description": "What specifically is required from the vendor for this item.",
+   "fieldname": "description",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Item requested",
+   "reqd": 1
+  },
+  {
+   "columns": 4,
+   "fieldname": "response_text",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Vendor response"
+  },
+  {
+   "columns": 2,
+   "fieldname": "response_attachment",
+   "fieldtype": "Attach",
+   "in_list_view": 1,
+   "label": "Vendor attachment"
+  },
+  {
+   "columns": 1,
+   "default": "0",
+   "fieldname": "responded",
+   "fieldtype": "Check",
+   "in_list_view": 1,
+   "label": "Responded",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "istable": 1,
+ "links": [],
+ "modified": "2026-07-21 16:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Vendor RFI Item",
+ "owner": "Administrator",
+ "permissions": [],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

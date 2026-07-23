@@ -2,6 +2,16 @@
 // For license information, please see license.txt
 
 frappe.ui.form.on("Facility", {
+	onload(frm) {
+		frm.set_query("district", () => ({
+			filters: { region: frm.doc.region || "" },
+		}));
+	},
+
+	region(frm) {
+		frm.set_value("district", "");
+	},
+
 	refresh(frm) {
 		if (frm.is_new()) return;
 

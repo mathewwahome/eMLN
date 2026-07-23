@@ -5,7 +5,7 @@
    "label": "Vendor Applications by Status"
   }
  ],
- "content": "[{\"id\":\"VenMgmtHdr1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Vendor Management</span>\",\"col\":12}},{\"id\":\"VenMgmtShrt1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Application\",\"col\":4}},{\"id\":\"VenMgmtShrt2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Type\",\"col\":4}},{\"id\":\"VenMgmtShrt3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":4}},{\"id\":\"VenMgmtShrt4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Document Type\",\"col\":4}},{\"id\":\"VenMgmtSpc1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"VenMgmtChart1\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Vendor Applications by Status\",\"col\":6}}]",
+ "content": "[{\"id\":\"VenMgmtHdr1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Vendor Management</span>\",\"col\":12}},{\"id\":\"VenMgmtShrt1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Application\",\"col\":4}},{\"id\":\"VenMgmtShrt2\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Type\",\"col\":4}},{\"id\":\"VenMgmtShrt3\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Supplier\",\"col\":4}},{\"id\":\"VenMgmtShrt4\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Document Type\",\"col\":4}},{\"id\":\"VenMgmtShrt5\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor Verification Check Type\",\"col\":4}},{\"id\":\"VenMgmtShrt6\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Vendor RFI\",\"col\":4}},{\"id\":\"VenMgmtSpc1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"VenMgmtChart1\",\"type\":\"chart\",\"data\":{\"chart_name\":\"Vendor Applications by Status\",\"col\":6}}]",
  "creation": "2026-07-21 10:00:00.000000",
  "custom_blocks": [],
  "docstatus": 0,
@@ -18,7 +18,7 @@
  "is_hidden": 0,
  "label": "Vendor Management",
  "links": [],
- "modified": "2026-07-21 10:40:00.000000",
+ "modified": "2026-07-21 16:00:00.000000",
  "modified_by": "Administrator",
  "module": "eLMN",
  "name": "Vendor Management",
@@ -30,6 +30,9 @@
  "roles": [
   {
    "role": "Procurement Officer"
+  },
+  {
+   "role": "Clinical/Pharmacy Reviewer"
   },
   {
    "role": "System Manager"
@@ -66,6 +69,22 @@
    "doc_view": "List",
    "label": "Vendor Document Type",
    "link_to": "Vendor Document Type",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Vendor Verification Check Type",
+   "link_to": "Vendor Verification Check Type",
+   "stats_filter": "[]",
+   "type": "DocType"
+  },
+  {
+   "color": "Orange",
+   "doc_view": "List",
+   "label": "Vendor RFI",
+   "link_to": "Vendor RFI",
    "stats_filter": "[]",
    "type": "DocType"
   }

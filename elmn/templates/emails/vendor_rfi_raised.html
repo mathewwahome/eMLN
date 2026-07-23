@@ -1,0 +1,11 @@
+<p>{{ _("Dear") }} {{ primary_contact_name }},</p>
+<p>{{ _("We need some additional information to continue reviewing your vendor application for {0} (reference {1}).").format(legal_entity_name, reference_number) }}</p>
+<p>{{ explanation }}</p>
+<p>{{ _("Items requested") }}:</p>
+<ul>
+{%- for item in items %}
+	<li>{{ item }}</li>
+{%- endfor %}
+</ul>
+<p>{{ _("Please respond by") }}: <b>{{ response_deadline }}</b></p>
+<p><a href="{{ response_url }}">{{ _("Respond to this request") }}</a></p>

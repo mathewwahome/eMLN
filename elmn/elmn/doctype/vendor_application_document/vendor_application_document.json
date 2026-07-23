@@ -7,11 +7,13 @@
  "engine": "InnoDB",
  "field_order": [
   "document_type",
-  "attachment"
+  "attachment",
+  "review_status",
+  "review_comment"
  ],
  "fields": [
   {
-   "columns": 4,
+   "columns": 3,
    "fieldname": "document_type",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -20,12 +22,30 @@
    "reqd": 1
   },
   {
-   "columns": 4,
+   "columns": 3,
    "fieldname": "attachment",
    "fieldtype": "Attach",
    "in_list_view": 1,
    "label": "Attachment",
    "reqd": 1
+  },
+  {
+   "columns": 2,
+   "fieldname": "review_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Review status",
+   "options": "\nAccepted\nQueried\nRejected"
+  },
+  {
+   "columns": 4,
+   "description": "Mandatory when Queried (explain what's needed) or Rejected (explain why).",
+   "depends_on": "eval:doc.review_status==\"Queried\"||doc.review_status==\"Rejected\"",
+   "fieldname": "review_comment",
+   "fieldtype": "Small Text",
+   "in_list_view": 1,
+   "label": "Review note / reason",
+   "mandatory_depends_on": "eval:doc.review_status==\"Queried\"||doc.review_status==\"Rejected\""
   }
  ],
  "index_web_pages_for_search": 1,

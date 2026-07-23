@@ -81,7 +81,7 @@ def save_vendor_application(data, draft=False, resuming_token=None):
 
 	is_draft = bool(cint(draft)) if not isinstance(draft, bool) else draft
 	cleaned = _sanitize(data or {})
-	cleaned["status"] = "Draft" if is_draft else "Pending Submission"
+	cleaned["status"] = "Draft" if is_draft else "Under Review"
 
 	existing_name = None
 	if resuming_token:
@@ -103,6 +103,52 @@ def save_vendor_application(data, draft=False, resuming_token=None):
 	if is_draft:
 		result["_draft_expiry_days"] = frappe.get_single("Invitation Settings").draft_expiry_days
 	return result
+
+
+@frappe.whitelist(allow_guest=True)
+def resume_rfi_response(token):
+	name = frappe.db.get_value("Vendor RFI", {"response_token": token, "status": "Pending Response"}, "name")
+	if not name:
+		return {
+			"valid": False,
+			"message": _("This link is invalid or this request has already been answered."),
+		}
+
+	doc = frappe.get_doc("Vendor RFI", name)
+	return {
+		"valid": True,
+		"prefill": {
+			"explanation": doc.explanation,
+			"response_deadline": doc.response_deadline,
+			"items": [
+				{
+					"description": row.description,
+					"response_text": row.response_text,
+					"response_attachment": row.response_attachment,
+				}
+				for row in doc.items
+			],
+		},
+	}
+
+
+@frappe.whitelist(allow_guest=True)
+def submit_rfi_response(token, items=None):
+	if isinstance(items, str):
+		items = frappe.parse_json(items)
+
+	name = frappe.db.get_value("Vendor RFI", {"response_token": token, "status": "Pending Response"}, "name")
+	if not name:
+		frappe.throw(_("This link is invalid or this request has already been answered."))
+
+	doc = frappe.get_doc("Vendor RFI", name)
+	for idx, row in enumerate(doc.items):
+		if items and idx < len(items) and isinstance(items[idx], dict):
+			row.response_text = items[idx].get("response_text")
+			row.response_attachment = items[idx].get("response_attachment")
+
+	doc.mark_responded()
+	return {"vendor_application": doc.vendor_application}
 
 
 def send_draft_expiry_notices():

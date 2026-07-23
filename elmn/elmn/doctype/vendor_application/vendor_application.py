@@ -12,17 +12,192 @@ from frappe.utils import add_days, now_datetime
 ACCOUNT_NUMBER_PATTERN = re.compile(r"^[A-Za-z0-9\-]{6,34}$")
 SWIFT_BIC_PATTERN = re.compile(r"^[A-Z]{6}[A-Z0-9]{2}([A-Z0-9]{3})?$")
 
+REVIEWER_ROLES = {"Clinical/Pharmacy Reviewer", "System Manager"}
+
+
+def _require_reviewer_access():
+	if not set(frappe.get_roles(frappe.session.user)) & REVIEWER_ROLES:
+		frappe.throw(_("Not permitted"), frappe.PermissionError)
+
 
 class VendorApplication(Document):
 	def validate(self):
 		self.validate_commodities()
 		self._validate_uploaded_files()
 		self.validate_banking_details()
+		self._validate_document_review_comments()
+		self._sync_document_review_status()
+		self._validate_verification_notes()
+		self._sync_verification_status()
 
 		if self.status == "Draft":
 			self._refresh_draft_expiry()
 		else:
 			self._check_required_documents()
+			self._ensure_verification_checklist()
+
+	def _validate_document_review_comments(self):
+		for row in self.documents:
+			if row.review_status in ("Queried", "Rejected") and not row.review_comment:
+				frappe.throw(
+					_("Row #{0} ({1}): a note/reason is required when marking a document {2}.").format(
+						row.idx, row.document_type, row.review_status
+					)
+				)
+
+	def _sync_document_review_status(self):
+		statuses = [row.review_status for row in self.documents]
+		if self.document_review_status == "Completed" and statuses and all(statuses):
+			return
+		self.document_review_status = "In Progress" if any(statuses) else "Not Started"
+
+	@frappe.whitelist()
+	def complete_document_review(self):
+		_require_reviewer_access()
+
+		missing = [row.document_type for row in self.documents if not row.review_status]
+		if missing:
+			frappe.throw(
+				_("Please set a review status for all documents before completing the review: {0}").format(
+					", ".join(missing)
+				)
+			)
+
+		self.document_review_status = "Completed"
+		self.document_review_completed_by = frappe.session.user
+		self.document_review_completed_on = now_datetime()
+		self.save()
+
+	def _ensure_verification_checklist(self):
+		if self.verifications:
+			return
+		for check_type in frappe.get_all(
+			"Vendor Verification Check Type",
+			fields=["name", "is_mandatory_default", "verification_method"],
+			order_by="creation",
+		):
+			self.append(
+				"verifications",
+				{
+					"check_type": check_type.name,
+					"is_mandatory": check_type.is_mandatory_default,
+					"verification_method": check_type.verification_method,
+				},
+			)
+
+	def _validate_verification_notes(self):
+		for row in self.verifications:
+			if row.outcome and not row.note:
+				frappe.throw(
+					_("Row #{0} ({1}): a note is required when recording a verification outcome.").format(
+						row.idx, row.check_type
+					)
+				)
+			if row.outcome and not row.verified_by:
+				row.verified_by = frappe.session.user
+				row.verified_on = now_datetime()
+			elif not row.outcome:
+				row.verified_by = None
+				row.verified_on = None
+
+	def _sync_verification_status(self):
+		outcomes = [row.outcome for row in self.verifications]
+		if self.verification_status == "Completed" and outcomes and all(outcomes):
+			return
+		self.verification_status = "In Progress" if any(outcomes) else "Not Started"
+
+	@frappe.whitelist()
+	def complete_verification(self):
+		_require_reviewer_access()
+
+		mandatory_checks = {row.check_type for row in self.verifications if row.is_mandatory}
+		verified_checks = {row.check_type for row in self.verifications if row.outcome}
+		missing = mandatory_checks - verified_checks
+		if missing:
+			frappe.throw(
+				_("Please record an outcome for the following mandatory checks before proceeding: {0}").format(
+					", ".join(sorted(missing))
+				)
+			)
+
+		self.verification_status = "Completed"
+		self.verification_completed_by = frappe.session.user
+		self.verification_completed_on = now_datetime()
+		self.save()
+
+	@frappe.whitelist()
+	def approve(self, notes=None):
+		_require_reviewer_access()
+
+		if self.status != "Under Review":
+			frappe.throw(_("Only an application that is Under Review can be approved."))
+
+		if self.document_review_status != "Completed":
+			frappe.throw(_("Document review must be completed before the application can be approved."))
+
+		not_accepted = [row.document_type for row in self.documents if row.review_status != "Accepted"]
+		if not_accepted:
+			frappe.throw(
+				_("All documents must be Accepted before the application can be approved: {0}").format(
+					", ".join(not_accepted)
+				)
+			)
+
+		if self.verification_status != "Completed":
+			frappe.throw(_("Information verification must be completed before the application can be approved."))
+
+		supplier_name = self._create_supplier_master()
+		self.supplier = supplier_name
+
+		self.status = "Approved"
+		self.approval_notes = notes
+		self.approved_by = frappe.session.user
+		self.approved_on = now_datetime()
+		self.save(ignore_permissions=True)
+
+		self._provision_vendor_account()
+
+	def _create_supplier_master(self):
+		supplier = frappe.get_doc(
+			{
+				"doctype": "Supplier",
+				"naming_series": "SUP-.YYYY.-",
+				"supplier_name": self.legal_entity_name,
+				"supplier_type": "Company",
+				"country": self.country_of_incorporation,
+				"tax_id": self.company_registration_number,
+				"supplier_group": (
+					"All Supplier Groups" if frappe.db.exists("Supplier Group", "All Supplier Groups") else None
+				),
+			}
+		)
+		supplier.insert(ignore_permissions=True)
+		return supplier.name
+
+	def _provision_vendor_account(self):
+		if not self.primary_contact_email:
+			frappe.throw(_("Primary contact email is required to activate a vendor account."))
+
+		user_name = frappe.db.get_value("User", self.primary_contact_email, "name")
+		if not user_name:
+			user = frappe.get_doc(
+				{
+					"doctype": "User",
+					"email": self.primary_contact_email,
+					"first_name": self.primary_contact_name or self.legal_entity_name,
+					"user_type": "System User",
+					"send_welcome_email": 0,
+				}
+			)
+			user.append("roles", {"role": "Supplier"})
+			user.insert(ignore_permissions=True)
+			user_name = user.name
+
+		self.db_set("vendor_user", user_name)
+
+		from elmn.api.notification.vendor import notify_approval
+
+		notify_approval(self, frappe.get_doc("User", user_name))
 
 	def after_insert(self):
 		if self.status == "Draft":

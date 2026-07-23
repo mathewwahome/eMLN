@@ -40,7 +40,24 @@
   "swift_bic_code",
   "page_break_documents",
   "documents_section",
-  "documents"
+  "documents",
+  "document_review_status",
+  "column_break_doc_review",
+  "document_review_completed_by",
+  "document_review_completed_on",
+  "verification_section",
+  "verifications",
+  "verification_status",
+  "column_break_verification",
+  "verification_completed_by",
+  "verification_completed_on",
+  "approval_section",
+  "supplier",
+  "vendor_user",
+  "column_break_approval",
+  "approved_by",
+  "approved_on",
+  "approval_notes"
  ],
  "fields": [
   {
@@ -53,13 +70,13 @@
    "reqd": 1
   },
   {
-   "default": "Pending Submission",
+   "default": "Under Review",
    "fieldname": "status",
    "fieldtype": "Select",
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Status",
-   "options": "Draft\nPending Submission\nExpired",
+   "options": "Draft\nUnder Review\nAwaiting Vendor Response\nApproved\nExpired",
    "read_only": 1,
    "reqd": 1
   },
@@ -262,11 +279,126 @@
    "fieldtype": "Table",
    "label": "Documents",
    "options": "Vendor Application Document"
+  },
+  {
+   "default": "Not Started",
+   "fieldname": "document_review_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Document review status",
+   "options": "Not Started\nIn Progress\nCompleted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_doc_review",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "document_review_completed_by",
+   "fieldtype": "Link",
+   "label": "Document review completed by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "document_review_completed_on",
+   "fieldtype": "Datetime",
+   "label": "Document review completed on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_section",
+   "fieldtype": "Section Break",
+   "label": "Information Verification"
+  },
+  {
+   "description": "Verify the vendor's company registration, tax compliance status, and regulatory licences against authoritative registers. Checks marked Mandatory must be completed before the application can proceed.",
+   "fieldname": "verifications",
+   "fieldtype": "Table",
+   "label": "Verification checks",
+   "options": "Vendor Application Verification"
+  },
+  {
+   "default": "Not Started",
+   "fieldname": "verification_status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Verification status",
+   "options": "Not Started\nIn Progress\nCompleted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_verification",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "verification_completed_by",
+   "fieldtype": "Link",
+   "label": "Verification completed by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "verification_completed_on",
+   "fieldtype": "Datetime",
+   "label": "Verification completed on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approval_section",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "description": "Vendor master record created on approval - this is the vendor's unique MLN vendor ID.",
+   "fieldname": "supplier",
+   "fieldtype": "Link",
+   "label": "Vendor ID (Supplier)",
+   "options": "Supplier",
+   "read_only": 1
+  },
+  {
+   "fieldname": "vendor_user",
+   "fieldtype": "Link",
+   "label": "Vendor user account",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_approval",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "approved_by",
+   "fieldtype": "Link",
+   "label": "Approved by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approved_on",
+   "fieldtype": "Datetime",
+   "label": "Approved on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "approval_notes",
+   "fieldtype": "Small Text",
+   "label": "Approval notes",
+   "read_only": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
- "links": [],
+ "links": [
+  {
+   "group": "Requests for Information",
+   "link_doctype": "Vendor RFI",
+   "link_fieldname": "vendor_application"
+  }
+ ],
  "modified": "2026-07-21 10:00:00.000000",
  "modified_by": "Administrator",
  "module": "eLMN",
@@ -290,6 +422,12 @@
    "read": 1,
    "report": 1,
    "role": "Procurement Officer"
+  },
+  {
+   "read": 1,
+   "report": 1,
+   "write": 1,
+   "role": "Clinical/Pharmacy Reviewer"
   },
   {
    "permlevel": 1,
