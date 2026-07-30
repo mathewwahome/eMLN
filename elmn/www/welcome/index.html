@@ -1,0 +1,131 @@
+{% extends "templates/web.html" %}
+
+{% block navbar %}{% endblock %}
+{% block footer %}{% endblock %}
+
+{% block page_content %}
+<header class="mln-header">
+	<div class="mln-brand">
+		<img class="mln-logo" src="{{ brand_image }}" alt="MediLink logo" onerror="this.style.display='none'">
+		<span class="mln-wordmark">MediLink</span>
+		<span class="mln-tagline">Electronic MediLink Network</span>
+	</div>
+	<nav class="mln-nav">
+		<a href="#about">About</a>
+		<a href="#how-it-works">How It Works</a>
+		<a href="#contact">Contact</a>
+		<a class="mln-btn btn-outline" href="/login">Log In</a>
+	</nav>
+</header>
+
+<section class="hero">
+	<span class="mln-badge">Joint Procurement for East African Hospitals</span>
+	<h1>Better prices. Reliable supply. One trusted network.</h1>
+	<p>
+		eMLN connects private hospitals and verified pharmaceutical suppliers through
+		MediLink's coordinated procurement platform &mdash; reducing costs, eliminating
+		stockouts, and bringing transparency to the supply chain.
+	</p>
+	<div class="hero-ctas">
+		<a class="mln-btn btn-navy" href="/facility-registration">Register as a Facility</a>
+		<a class="mln-btn btn-teal" href="/vendor-registration">Register as a Supplier</a>
+	</div>
+	<div class="hero-login">
+		Already have an account? <a href="/login">Log in &rarr;</a>
+	</div>
+</section>
+
+<section id="about" class="section-what-is">
+	<span class="mln-eyebrow">What is eMLN</span>
+	<h2>A smarter way to procure medical commodities</h2>
+	<div class="mln-card-grid">
+		<div class="mln-card">
+			<div class="mln-icon">&#10003;</div>
+			<h3>Aggregated Demand</h3>
+			<p>Hospitals pool their orders for better unit prices. Bulk buying power negotiated centrally by MediLink.</p>
+		</div>
+		<div class="mln-card">
+			<div class="mln-icon">&#8853;</div>
+			<h3>Supply Chain Visibility</h3>
+			<p>Track orders, deliveries, and stock levels in real time. Electronic proof of delivery at every step.</p>
+		</div>
+		<div class="mln-card">
+			<div class="mln-icon">&#10021;</div>
+			<h3>Verified Suppliers</h3>
+			<p>Every supplier is vetted for quality, compliance, and capacity before joining the network.</p>
+		</div>
+	</div>
+</section>
+
+<section id="how-it-works" class="section-how-it-works">
+	<span class="mln-eyebrow">How It Works</span>
+	<h2>Get started in four simple steps</h2>
+	<div class="mln-step-grid">
+		<div class="mln-step">
+			<div class="mln-step-circle">1</div>
+			<h3>Create Application</h3>
+			<p>Fill out the registration form for your organisation type.</p>
+		</div>
+		<div class="mln-step">
+			<div class="mln-step-circle">2</div>
+			<h3>MediLink Reviews</h3>
+			<p>Our team verifies your credentials and documentation.</p>
+		</div>
+		<div class="mln-step">
+			<div class="mln-step-circle">3</div>
+			<h3>Get Approved</h3>
+			<p>Receive your activation link by email once approved.</p>
+		</div>
+		<div class="mln-step">
+			<div class="mln-step-circle">4</div>
+			<h3>Access the System</h3>
+			<p>Set up your password and MFA, then log in to your dashboard.</p>
+		</div>
+	</div>
+</section>
+
+<section class="section-audience">
+	<div class="mln-audience-card audience-facility">
+		<div class="mln-icon">&#128197;</div>
+		<h3>For Facilities</h3>
+		<p>Join the network of private hospitals benefitting from joint procurement.</p>
+		<ul>
+			<li>Lower commodity prices through aggregated demand</li>
+			<li>Reduced stockouts and medication expiries</li>
+			<li>Electronic ordering and delivery confirmation</li>
+			<li>Real-time supply chain visibility</li>
+		</ul>
+		<a class="mln-btn btn-navy" href="/facility-registration">Register as a Facility &rarr;</a>
+	</div>
+	<div class="mln-audience-card audience-supplier">
+		<div class="mln-icon">&#8853;</div>
+		<h3>For Suppliers</h3>
+		<p>Become an approved supplier to the eMLN hospital network.</p>
+		<ul>
+			<li>Access a verified network of private hospitals</li>
+			<li>Transparent, digital order and payment process</li>
+			<li>Predictable demand through procurement cycles</li>
+			<li>Credible procurement partner in MediLink</li>
+		</ul>
+		<a class="mln-btn btn-teal" href="/vendor-registration">Register as a Supplier &rarr;</a>
+	</div>
+</section>
+
+<footer id="contact" class="site-footer">
+	<div class="footer-top">
+		<div class="mln-brand">
+			<img class="mln-logo" src="{{ brand_image }}" alt="MediLink logo" onerror="this.style.display='none'">
+			<span class="mln-wordmark">MediLink</span>
+			<span class="mln-tagline">Electronic MediLink Network</span>
+		</div>
+		<div class="footer-links">
+			<a href="#about">About</a>
+			<a href="#contact">Contact</a>
+			<a href="/login">Log In</a>
+		</div>
+	</div>
+	<div class="footer-bottom">
+		&copy; {{ current_year }} MediLink. All rights reserved.
+	</div>
+</footer>
+{% endblock %}
