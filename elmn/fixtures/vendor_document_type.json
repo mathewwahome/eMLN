@@ -7,6 +7,7 @@
   "document_name": "Certificate of Incorporation",
   "is_mandatory_default": 1,
   "max_file_size_mb": 5,
+  "modified": "2026-07-31 10:23:21.242993",
   "name": "Certificate of Incorporation"
  },
  {
@@ -17,6 +18,7 @@
   "document_name": "Business Registration Certificate",
   "is_mandatory_default": 1,
   "max_file_size_mb": 5,
+  "modified": "2026-07-31 10:23:21.298565",
   "name": "Business Registration Certificate"
  },
  {
@@ -27,6 +29,7 @@
   "document_name": "Tax Compliance Certificate",
   "is_mandatory_default": 1,
   "max_file_size_mb": 5,
+  "modified": "2026-07-31 10:23:21.312214",
   "name": "Tax Compliance Certificate"
  },
  {
@@ -37,6 +40,7 @@
   "document_name": "Proof of Banking Details",
   "is_mandatory_default": 1,
   "max_file_size_mb": 5,
+  "modified": "2026-07-31 10:23:21.325839",
   "name": "Proof of Banking Details"
  },
  {
@@ -47,6 +51,7 @@
   "document_name": "Product Licences / Regulatory Approvals",
   "is_mandatory_default": 0,
   "max_file_size_mb": 10,
+  "modified": "2026-07-31 10:23:21.340037",
   "name": "Product Licences / Regulatory Approvals"
  },
  {
@@ -57,6 +62,7 @@
   "document_name": "GMP Certificate",
   "is_mandatory_default": 0,
   "max_file_size_mb": 10,
+  "modified": "2026-07-31 10:23:21.353445",
   "name": "GMP Certificate"
  },
  {
@@ -67,6 +73,7 @@
   "document_name": "Other Supporting Document",
   "is_mandatory_default": 0,
   "max_file_size_mb": 10,
+  "modified": "2026-07-31 10:23:21.367398",
   "name": "Other Supporting Document"
  }
 ]

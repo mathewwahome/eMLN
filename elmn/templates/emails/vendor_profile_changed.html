@@ -1,0 +1,7 @@
+<p>{{ _("Your MLN vendor profile for {0} has been updated by MediLink.").format(supplier_name) }}</p>
+<ul>
+{% for change in changes %}
+	<li><b>{{ change.label }}:</b> {{ change.old or "-" }} &rarr; {{ change.new or "-" }}</li>
+{% endfor %}
+</ul>
+<p>{{ _("If you have questions about this change, please contact MediLink support.") }}</p>

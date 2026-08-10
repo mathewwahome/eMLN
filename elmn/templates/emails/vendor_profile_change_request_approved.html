@@ -1,0 +1,6 @@
+<p>{{ _("Your profile change request for {0} has been approved and applied.").format(supplier_name) }}</p>
+<ul>
+{% for change in changes %}
+	<li><b>{{ change.label }}:</b> {{ change.old or "-" }} &rarr; {{ change.new or "-" }}</li>
+{% endfor %}
+</ul>

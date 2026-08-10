@@ -4,6 +4,54 @@
   "completed_by_role": "All",
   "docstatus": 0,
   "doctype": "Workflow Action",
+  "modified": "2026-07-14 09:14:16.225552",
+  "name": "h9imo2h9tr",
+  "permitted_roles": [
+   {
+    "parent": "h9imo2h9tr",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   }
+  ],
+  "reference_doctype": "Facility",
+  "reference_name": "F-2026-07-00007",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Draft"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "Registration Officer",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
+  "modified": "2026-07-14 09:23:10.984880",
+  "name": "mglu9ha1u1",
+  "permitted_roles": [
+   {
+    "parent": "mglu9ha1u1",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "All"
+   },
+   {
+    "parent": "mglu9ha1u1",
+    "parentfield": "permitted_roles",
+    "parenttype": "Workflow Action",
+    "role": "Registration Officer"
+   }
+  ],
+  "reference_doctype": "Facility",
+  "reference_name": "F-2026-07-00007",
+  "status": "Completed",
+  "user": null,
+  "workflow_state": "Registration Officer"
+ },
+ {
+  "completed_by": "Administrator",
+  "completed_by_role": "All",
+  "docstatus": 0,
+  "doctype": "Workflow Action",
   "modified": "2026-07-12 22:03:15.948003",
   "name": "sc7dloa4iv",
   "permitted_roles": [

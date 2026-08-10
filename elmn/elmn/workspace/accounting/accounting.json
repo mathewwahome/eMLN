@@ -586,7 +586,7 @@
    "type": "Link"
   }
  ],
- "modified": "2026-06-26 08:39:49.570039",
+ "modified": "2026-08-07 10:57:58.096406",
  "modified_by": "Administrator",
  "module": "eLMN",
  "name": "Accounting",
@@ -613,7 +613,20 @@
  "public": 1,
  "quick_lists": [],
  "restrict_to_domain": "",
- "roles": [],
+ "roles": [
+  {
+   "role": "Accounts Manager"
+  },
+  {
+   "role": "Finance Officer"
+  },
+  {
+   "role": "Head of Finance/Finance Approver"
+  },
+  {
+   "role": "Accountant"
+  }
+ ],
  "sequence_id": 2.0,
  "shortcuts": [
   {

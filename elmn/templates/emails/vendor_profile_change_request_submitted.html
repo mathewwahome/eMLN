@@ -1,0 +1,8 @@
+<p>{{ _("{0} submitted a profile change request for {1}.").format(requested_by, supplier_name) }}</p>
+<p><b>{{ _("Risk level") }}:</b> {{ risk_level }}</p>
+<ul>
+{% for change in changes %}
+	<li><b>{{ change.label }}:</b> {{ change.old or "-" }} &rarr; {{ change.new or "-" }}</li>
+{% endfor %}
+</ul>
+<p><a href="{{ review_url }}">{{ _("Review the request") }}</a></p>

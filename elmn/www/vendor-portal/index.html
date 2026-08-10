@@ -1,0 +1,92 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="vendor-portal">
+	<header class="vendor-portal-header">
+		<h1>{{ supplier.supplier_name }}</h1>
+		<p>Vendor Portal</p>
+	</header>
+
+	<section>
+		<h2>Purchase Orders</h2>
+		{% if purchase_orders %}
+		<table class="table">
+			<thead>
+				<tr><th>PO</th><th>Date</th><th>Status</th><th>Total</th></tr>
+			</thead>
+			<tbody>
+				{% for po in purchase_orders %}
+				<tr>
+					<td>{{ po.name }}</td>
+					<td>{{ po.transaction_date }}</td>
+					<td>{{ po.status }}</td>
+					<td>{{ po.grand_total }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>No purchase orders yet.</p>
+		{% endif %}
+	</section>
+
+	<section>
+		<h2>GRN Acknowledgements</h2>
+		{% if purchase_receipts %}
+		<table class="table">
+			<thead>
+				<tr><th>GRN</th><th>Date</th><th>Status</th></tr>
+			</thead>
+			<tbody>
+				{% for grn in purchase_receipts %}
+				<tr>
+					<td>{{ grn.name }}</td>
+					<td>{{ grn.posting_date }}</td>
+					<td>{{ grn.status }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>No deliveries received yet.</p>
+		{% endif %}
+	</section>
+
+	<section>
+		<h2>Performance Scorecard</h2>
+		{% if scorecard %}
+		<p>Standing: {{ scorecard.indicator_color }} &mdash; Score: {{ scorecard.total_score }}</p>
+		{% else %}
+		<p>No scorecard available yet.</p>
+		{% endif %}
+	</section>
+
+	<section>
+		<h2>Open RFIs / Queries</h2>
+		{% if rfis %}
+		<table class="table">
+			<thead>
+				<tr><th>RFI</th><th>Status</th><th>Deadline</th></tr>
+			</thead>
+			<tbody>
+				{% for rfi in rfis %}
+				<tr>
+					<td>{{ rfi.name }}</td>
+					<td>{{ rfi.status }}</td>
+					<td>{{ rfi.response_deadline }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>No open RFIs.</p>
+		{% endif %}
+	</section>
+
+	<section>
+		<h2>Profile &amp; Documents</h2>
+		<a class="btn btn-default" href="/app/supplier/{{ supplier.name }}">View Profile &rarr;</a>
+		<a class="btn btn-default" href="/vendor-portal/edit-profile">Request Profile Change &rarr;</a>
+	</section>
+</div>
+{% endblock %}

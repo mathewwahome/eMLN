@@ -12,7 +12,7 @@
  "is_hidden": 0,
  "label": "Welcome Workspace",
  "links": [],
- "modified": "2026-06-29 07:58:35.170134",
+ "modified": "2026-07-31 10:38:18.033927",
  "modified_by": "Administrator",
  "module": "eLMN",
  "name": "Welcome Workspace",
@@ -21,7 +21,11 @@
  "parent_page": "",
  "public": 1,
  "quick_lists": [],
- "roles": [],
+ "roles": [
+  {
+   "role": "All"
+  }
+ ],
  "sequence_id": 22.0,
  "shortcuts": [],
  "title": "Welcome Workspace"

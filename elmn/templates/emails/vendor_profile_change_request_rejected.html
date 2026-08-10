@@ -1,0 +1,4 @@
+<p>{{ _("Your profile change request for {0} was not approved.").format(supplier_name) }}</p>
+{% if reason %}
+<p><b>{{ _("Reason") }}:</b> {{ reason }}</p>
+{% endif %}

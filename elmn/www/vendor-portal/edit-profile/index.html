@@ -1,0 +1,114 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="vendor-portal">
+	<header class="vendor-portal-header">
+		<h1>{{ supplier.supplier_name }}</h1>
+		<p>Request a Profile Change</p>
+	</header>
+
+	<section>
+		<p>
+			Low-risk changes (contact details, address) and high-risk changes (banking details, legal name,
+			commodity scope) are both submitted to MediLink for review before they take effect.
+		</p>
+		<form id="profile-change-form">
+			<h2>Contact &amp; Address</h2>
+			{% for field in low_risk_fields %}
+			<div class="form-group">
+				<label for="field-{{ field.fieldname }}">{{ field.label }}</label>
+				<input type="text" id="field-{{ field.fieldname }}" name="{{ field.fieldname }}" value="{{ field.value or "" }}">
+			</div>
+			{% endfor %}
+
+			<h2>Banking &amp; Legal (high risk)</h2>
+			{% for field in high_risk_fields %}
+			<div class="form-group">
+				<label for="field-{{ field.fieldname }}">{{ field.label }}</label>
+				<input type="text" id="field-{{ field.fieldname }}" name="{{ field.fieldname }}" value="{{ field.value or "" }}">
+			</div>
+			{% endfor %}
+
+			<div class="form-group">
+				<label for="field-primary_commodity_categories">Commodity scope (comma-separated, high risk)</label>
+				<input type="text" id="field-primary_commodity_categories" name="primary_commodity_categories" value="{{ commodity_scope }}">
+			</div>
+
+			<button type="submit" class="mln-btn btn-navy">Submit Change Request</button>
+			<span id="profile-change-status"></span>
+		</form>
+	</section>
+
+	<section>
+		<h2>My Change Requests</h2>
+		{% if requests %}
+		<table class="table">
+			<thead>
+				<tr><th>Request</th><th>Status</th><th>Risk</th><th>Submitted</th></tr>
+			</thead>
+			<tbody>
+				{% for r in requests %}
+				<tr>
+					<td>{{ r.name }}</td>
+					<td>{{ r.status }}</td>
+					<td>{{ r.risk_level }}</td>
+					<td>{{ r.creation }}</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		{% else %}
+		<p>No change requests yet.</p>
+		{% endif %}
+	</section>
+</div>
+
+<script>
+(function () {
+	var originalValues = {};
+	document.querySelectorAll("#profile-change-form input[name]").forEach(function (input) {
+		originalValues[input.name] = input.value;
+	});
+
+	document.getElementById("profile-change-form").addEventListener("submit", function (event) {
+		event.preventDefault();
+
+		var changes = {};
+		document.querySelectorAll("#profile-change-form input[name]").forEach(function (input) {
+			if (input.value !== originalValues[input.name]) {
+				changes[input.name] = input.value;
+			}
+		});
+
+		var statusEl = document.getElementById("profile-change-status");
+		if (Object.keys(changes).length === 0) {
+			statusEl.textContent = "No changes to submit.";
+			return;
+		}
+
+		fetch("/api/method/elmn.api.vendor.submit_profile_change_request", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"X-Frappe-CSRF-Token": frappe.csrf_token,
+			},
+			body: JSON.stringify({ changes: changes }),
+		})
+			.then(function (response) {
+				if (!response.ok) {
+					return response.json().then(function (data) {
+						throw new Error((data.exception || data._server_messages || "Request failed"));
+					});
+				}
+				return response.json();
+			})
+			.then(function () {
+				window.location.reload();
+			})
+			.catch(function (error) {
+				statusEl.textContent = "Could not submit: " + error.message;
+			});
+	});
+})();
+</script>
+{% endblock %}

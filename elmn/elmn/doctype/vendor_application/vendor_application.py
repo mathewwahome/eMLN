@@ -146,18 +146,37 @@ class VendorApplication(Document):
 		if self.verification_status != "Completed":
 			frappe.throw(_("Information verification must be completed before the application can be approved."))
 
-		supplier_name = self._create_supplier_master()
-		self.supplier = supplier_name
-
 		self.status = "Approved"
 		self.approval_notes = notes
 		self.approved_by = frappe.session.user
 		self.approved_on = now_datetime()
 		self.save(ignore_permissions=True)
 
+		self._link_supplier_account()
+
+	@frappe.whitelist()
+	def link_supplier_account(self):
+		_require_reviewer_access()
+
+		if self.status != "Approved":
+			frappe.throw(_("Only an approved vendor application can be linked to a supplier account."))
+
+		if self.supplier and self.vendor_user:
+			frappe.msgprint(_("A supplier account is already linked to this application."))
+			return
+
+		self._link_supplier_account()
+
+	def _link_supplier_account(self):
+		if not self.supplier:
+			self.db_set("supplier", self._create_supplier_master())
+
 		self._provision_vendor_account()
 
 	def _create_supplier_master(self):
+		commodity_categories = list(
+			{row.commodity_category for row in self.commodities if row.commodity_category}
+		)
 		supplier = frappe.get_doc(
 			{
 				"doctype": "Supplier",
@@ -169,6 +188,27 @@ class VendorApplication(Document):
 				"supplier_group": (
 					"All Supplier Groups" if frappe.db.exists("Supplier Group", "All Supplier Groups") else None
 				),
+				"vendor_type": self.vendor_type,
+				"vendor_status": "Active",
+				"contract_status": "Active",
+				"vendor_application": self.name,
+				"primary_commodity_categories": [
+					{"commodity_category": category} for category in commodity_categories
+				],
+				"documents": [
+					{"document_type": row.document_type, "attachment": row.attachment}
+					for row in self.documents
+					if row.attachment
+				],
+				"bank_name": self.bank_name,
+				"branch_name": self.branch_name,
+				"account_name": self.account_name,
+				"account_number": self.account_number,
+				"swift_bic_code": self.swift_bic_code,
+				"primary_contact_name": self.primary_contact_name,
+				"primary_contact_phone": self.primary_contact_phone,
+				"primary_contact_email": self.primary_contact_email,
+				"registered_address": self.registered_address,
 			}
 		)
 		supplier.insert(ignore_permissions=True)
@@ -192,12 +232,58 @@ class VendorApplication(Document):
 			user.append("roles", {"role": "Supplier"})
 			user.insert(ignore_permissions=True)
 			user_name = user.name
+		else:
+			self._ensure_supplier_role(user_name)
 
 		self.db_set("vendor_user", user_name)
+		self._grant_supplier_access(user_name)
 
 		from elmn.api.notification.vendor import notify_approval
 
 		notify_approval(self, frappe.get_doc("User", user_name))
+
+	@frappe.whitelist()
+	def change_vendor_user(self, new_user):
+		_require_reviewer_access()
+
+		if self.status != "Approved" or not self.supplier:
+			frappe.throw(_("The vendor account must be linked before you can change the vendor user."))
+
+		if not frappe.db.exists("User", new_user):
+			frappe.throw(_("User {0} does not exist.").format(new_user))
+
+		if new_user == self.vendor_user:
+			frappe.msgprint(_("{0} is already the vendor user for this application.").format(new_user))
+			return
+
+		old_user = self.vendor_user
+		if old_user:
+			frappe.db.delete(
+				"User Permission", {"user": old_user, "allow": "Supplier", "for_value": self.supplier}
+			)
+
+		self._ensure_supplier_role(new_user)
+		self.db_set("vendor_user", new_user)
+		self._grant_supplier_access(new_user)
+
+	def _ensure_supplier_role(self, user_name):
+		if not frappe.db.exists("Has Role", {"parent": user_name, "role": "Supplier"}):
+			user = frappe.get_doc("User", user_name)
+			user.append("roles", {"role": "Supplier"})
+			user.save(ignore_permissions=True)
+
+	def _grant_supplier_access(self, user_name):
+		if not frappe.db.exists(
+			"User Permission", {"user": user_name, "allow": "Supplier", "for_value": self.supplier}
+		):
+			frappe.get_doc(
+				{
+					"doctype": "User Permission",
+					"user": user_name,
+					"allow": "Supplier",
+					"for_value": self.supplier,
+				}
+			).insert(ignore_permissions=True)
 
 	def after_insert(self):
 		if self.status == "Draft":

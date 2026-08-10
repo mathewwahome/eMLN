@@ -27,6 +27,31 @@ frappe.ui.form.on("Vendor Application", {
 			}, __("Verification"));
 		}
 
+		if (frm.doc.status === "Approved" && (!frm.doc.supplier || !frm.doc.vendor_user)) {
+			frm.add_custom_button(__("Link Supplier Account"), () => {
+				frm.call("link_supplier_account").then(() => frm.reload_doc());
+			}, __("Approval"));
+		}
+
+		if (frm.doc.status === "Approved" && frm.doc.supplier) {
+			frm.add_custom_button(__("Change Vendor User"), () => {
+				frappe.prompt(
+					{
+						fieldname: "new_user",
+						fieldtype: "Link",
+						options: "User",
+						label: __("New vendor user"),
+						reqd: 1,
+						get_query: () => ({ filters: { user_type: "System User", enabled: 1 } }),
+					},
+					(values) => {
+						frm.call("change_vendor_user", { new_user: values.new_user }).then(() => frm.reload_doc());
+					},
+					__("Change Vendor User")
+				);
+			}, __("Approval"));
+		}
+
 		if (frm.doc.status === "Under Review") {
 			frm.add_custom_button(__("Request Additional Information"), () => {
 				frappe.new_doc("Vendor RFI", { vendor_application: frm.doc.name });

@@ -148,5 +148,45 @@
   "response_html": "<p>{{ _(\"The commodity {0} ({1}) was deactivated.\").format(item_name, item_code) }}</p>\n<p><b>{{ _(\"Reason\") }}:</b> {{ reason }}</p>\n<p>{{ _(\"The following active purchase order(s) reference this commodity and have been flagged for review:\") }}</p>\n<ul>\n{% for po in purchase_orders %}\n\t<li><a href=\"{{ po.url }}\">{{ po.name }}</a></li>\n{% endfor %}\n</ul>\n",
   "subject": "{{ purchase_orders|length }} active purchase order(s) flagged for review: commodity {{ item_name }} deactivated",
   "use_html": 1
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-31 13:29:43.829292",
+  "name": "vendor_profile_changed",
+  "response": null,
+  "response_html": "<p>{{ _(\"Your MLN vendor profile for {0} has been updated by MediLink.\").format(supplier_name) }}</p>\n<ul>\n{% for change in changes %}\n\t<li><b>{{ change.label }}:</b> {{ change.old or \"-\" }} &rarr; {{ change.new or \"-\" }}</li>\n{% endfor %}\n</ul>\n<p>{{ _(\"If you have questions about this change, please contact MediLink support.\") }}</p>\n",
+  "subject": "Your MLN vendor profile has been updated: {{ supplier_name }}",
+  "use_html": 0
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-31 13:29:44.104903",
+  "name": "vendor_profile_change_request_submitted",
+  "response": null,
+  "response_html": "<p>{{ _(\"{0} submitted a profile change request for {1}.\").format(requested_by, supplier_name) }}</p>\n<p><b>{{ _(\"Risk level\") }}:</b> {{ risk_level }}</p>\n<ul>\n{% for change in changes %}\n\t<li><b>{{ change.label }}:</b> {{ change.old or \"-\" }} &rarr; {{ change.new or \"-\" }}</li>\n{% endfor %}\n</ul>\n<p><a href=\"{{ review_url }}\">{{ _(\"Review the request\") }}</a></p>\n",
+  "subject": "Vendor profile change request submitted: {{ supplier_name }}",
+  "use_html": 0
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-31 13:29:44.108883",
+  "name": "vendor_profile_change_request_approved",
+  "response": null,
+  "response_html": "<p>{{ _(\"Your profile change request for {0} has been approved and applied.\").format(supplier_name) }}</p>\n<ul>\n{% for change in changes %}\n\t<li><b>{{ change.label }}:</b> {{ change.old or \"-\" }} &rarr; {{ change.new or \"-\" }}</li>\n{% endfor %}\n</ul>\n",
+  "subject": "Your vendor profile change request has been approved: {{ supplier_name }}",
+  "use_html": 0
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Email Template",
+  "modified": "2026-07-31 13:29:44.112176",
+  "name": "vendor_profile_change_request_rejected",
+  "response": null,
+  "response_html": "<p>{{ _(\"Your profile change request for {0} was not approved.\").format(supplier_name) }}</p>\n{% if reason %}\n<p><b>{{ _(\"Reason\") }}:</b> {{ reason }}</p>\n{% endif %}\n",
+  "subject": "Your vendor profile change request was not approved: {{ supplier_name }}",
+  "use_html": 0
  }
 ]

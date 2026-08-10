@@ -43,7 +43,7 @@ web_include_css = "/assets/elmn/css/welcome.css"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Item": "public/js/item.js"}
+doctype_js = {"Item": "public/js/item.js", "Supplier": "public/js/supplier.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -156,6 +156,15 @@ doc_events = {
 	"Employee": {
 		"validate": "elmn.api.notification.facility.validate_employee_facility_user",
 		"on_update": "elmn.api.notification.facility.on_employee_update"
+	},
+	"Supplier": {
+		"on_update": "elmn.api.vendor.notify_vendor_of_profile_change"
+	},
+	"Purchase Order": {
+		"on_submit": "elmn.api.vendor.update_supplier_last_activity"
+	},
+	"Purchase Receipt": {
+		"on_submit": "elmn.api.vendor.update_supplier_last_activity"
 	}
 }
 
@@ -187,6 +196,9 @@ scheduler_events = {
 # override_doctype_dashboards = {
 # 	"Task": "elmn.task.get_dashboard_data"
 # }
+override_doctype_dashboards = {
+	"Supplier": "elmn.api.vendor.get_supplier_dashboard_data"
+}
 
 # exempt linked doctypes from being automatically cancelled
 #
@@ -286,6 +298,10 @@ fixtures = [
 					"vendor_rfi_raised",
 					"vendor_rfi_responded",
 					"vendor_approved",
+					"vendor_profile_changed",
+					"vendor_profile_change_request_submitted",
+					"vendor_profile_change_request_approved",
+					"vendor_profile_change_request_rejected",
 					"approval",
 					"registration_pending",
 					"rejection",
@@ -302,10 +318,27 @@ fixtures = [
 			]
 		],
 	},
-	{
-		"doctype": "Custom DocPerm",
-		"filters": [
-			["role", "in", ["Catalogue Manager", "Administrator", "Facility Procurement Officer", "Guest"]]
-		],
-	},
+    "Custom DocPerm",
+	# {
+		# "doctype": "Custom DocPerm",
+		# "filters": [
+		# 	[
+		# 		"role",
+		# 		"in",
+		# 		[
+		# 			"Catalogue Manager",
+		# 			"Administrator",
+		# 			"Facility Procurement Officer",
+		# 			"Guest",
+		# 			"Supplier",
+		# 			"Clinical/Pharmacy Reviewer",
+		# 			"Accountant",
+		# 			"Accounts Manager",
+		# 			"Finance Officer",
+		# 			"Head of Finance/Finance Approver",
+		# 			"System Manager",
+		# 		],
+		# 	]
+		# ],
+	# },
 ]
