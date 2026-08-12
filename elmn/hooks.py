@@ -275,70 +275,7 @@ fixtures = [
 	"Vendor Type",
 	"Vendor Document Type",
 	"Vendor Verification Check Type",
-	{
-		"doctype": "Web Form",
-		"filters": [
-			["name", "in", ["facility-registration", "vendor-registration", "vendor-rfi-response"]]
-		],
-	},
-	{
-		"doctype": "Email Template",
-		"filters": [
-			[
-				"name",
-				"in",
-				[
-					"invitation",
-					"invitation_cancelled",
-					"submission_confirmation",
-					"vendor_submission_confirmation",
-					"vendor_submission_pending_review",
-					"vendor_draft_saved",
-					"vendor_draft_expiry_warning",
-					"vendor_rfi_raised",
-					"vendor_rfi_responded",
-					"vendor_approved",
-					"vendor_profile_changed",
-					"vendor_profile_change_request_submitted",
-					"vendor_profile_change_request_approved",
-					"vendor_profile_change_request_rejected",
-					"approval",
-					"registration_pending",
-					"rejection",
-					"facility_user_request_rejected",
-					"facility_user_request_pending",
-					"facility_offboarded",
-					"facility_reactivated",
-					"facility_account_activation",
-					"purchase_order_flagged",
-					"commodity_change_request_pending",
-					"commodity_change_request_approved",
-					"commodity_change_request_rejected",
-				],
-			]
-		],
-	},
+	"Web Form",
+	"Email Template",
     "Custom DocPerm",
-	# {
-		# "doctype": "Custom DocPerm",
-		# "filters": [
-		# 	[
-		# 		"role",
-		# 		"in",
-		# 		[
-		# 			"Catalogue Manager",
-		# 			"Administrator",
-		# 			"Facility Procurement Officer",
-		# 			"Guest",
-		# 			"Supplier",
-		# 			"Clinical/Pharmacy Reviewer",
-		# 			"Accountant",
-		# 			"Accounts Manager",
-		# 			"Finance Officer",
-		# 			"Head of Finance/Finance Approver",
-		# 			"System Manager",
-		# 		],
-		# 	]
-		# ],
-	# },
 ]
