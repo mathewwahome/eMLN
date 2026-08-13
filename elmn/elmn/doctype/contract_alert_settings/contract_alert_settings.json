@@ -1,0 +1,53 @@
+{
+ "actions": [],
+ "creation": "2026-08-13 08:22:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "expiring_soon_lead_days",
+  "escalation_lead_days"
+ ],
+ "fields": [
+  {
+   "default": "30",
+   "description": "A vendor contract's status becomes \"Expiring Soon\" and the first expiry alert is sent to the assigned Procurement Officer this many days before its end date.",
+   "fieldname": "expiring_soon_lead_days",
+   "fieldtype": "Int",
+   "label": "Expiring Soon threshold (days before expiry)",
+   "reqd": 1
+  },
+  {
+   "default": "7",
+   "description": "A second, escalation alert is sent this many days before expiry if the contract still hasn't been renewed, terminated, or superseded. Must be smaller than the threshold above.",
+   "fieldname": "escalation_lead_days",
+   "fieldtype": "Int",
+   "label": "Escalation alert (days before expiry)",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-13 08:22:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Contract Alert Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

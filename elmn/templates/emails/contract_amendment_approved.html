@@ -1,0 +1,8 @@
+<p>{{ _("Your contract with {0} has been amended, effective as of the new contract {1}.").format(supplier_name, contract_id) }}</p>
+<p><b>{{ _("Previous contract") }}:</b> {{ previous_contract_id }}</p>
+<p><b>{{ _("Reason") }}:</b> {{ reason }}</p>
+<ul>
+{% for change in changes %}
+	<li><b>{{ change.label }}:</b> {{ change.old or "-" }} &rarr; {{ change.new or "-" }}</li>
+{% endfor %}
+</ul>

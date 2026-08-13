@@ -1,0 +1,7 @@
+<p>{{ _("A banking detail change has been requested and needs a second Finance Officer's approval.") }}</p>
+<ul>
+	<li><b>{{ _("Supplier") }}:</b> {{ supplier_name }}</li>
+	<li><b>{{ _("Requested by") }}:</b> {{ requested_by }}</li>
+</ul>
+<p>{{ _("You cannot approve this if you are the person who requested it.") }}</p>
+<p><a href="{{ url }}">{{ _("Review the request") }}</a></p>

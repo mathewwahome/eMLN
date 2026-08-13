@@ -1,6 +1,23 @@
 frappe.ui.form.on("Supplier", {
 	refresh(frm) {
 		if (frm.is_new()) return;
+
+		const is_finance = ["Finance Officer", "Head of Finance/Finance Approver", "System Manager"].some(
+			(role) => frappe.user_roles.includes(role)
+		);
+		if (is_finance) {
+			frm.add_custom_button(__("Request Banking Detail Change"), () => {
+				frappe.new_doc("Supplier Bank Detail Change Request", {
+					supplier: frm.doc.name,
+					new_bank_name: frm.doc.bank_name,
+					new_branch_name: frm.doc.branch_name,
+					new_account_name: frm.doc.account_name,
+					new_account_number: frm.doc.account_number,
+					new_swift_bic_code: frm.doc.swift_bic_code,
+				});
+			}, __("Banking Details"));
+		}
+
 		if (!frappe.user_roles.includes("Clinical/Pharmacy Reviewer") && !frappe.user_roles.includes("System Manager")) return;
 
 		frm.add_custom_button(__("Edit Vendor Profile"), () => {

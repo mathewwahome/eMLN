@@ -1,0 +1,13 @@
+<p>{{ _("A contract amendment needs your approval.") }}</p>
+<ul>
+	<li><b>{{ _("Contract") }}:</b> {{ contract_id }}</li>
+	<li><b>{{ _("Vendor") }}:</b> {{ vendor_name }}</li>
+	<li><b>{{ _("Requested by") }}:</b> {{ requested_by }}</li>
+	<li><b>{{ _("Reason") }}:</b> {{ reason }}</li>
+</ul>
+<ul>
+{% for change in changes %}
+	<li><b>{{ change.label }}:</b> {{ change.old or "-" }} &rarr; {{ change.new or "-" }}</li>
+{% endfor %}
+</ul>
+<p><a href="{{ url }}">{{ _("Review the amendment") }}</a></p>

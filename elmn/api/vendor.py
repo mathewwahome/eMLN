@@ -15,13 +15,11 @@ LOW_RISK_PROFILE_FIELDS = {
 }
 
 HIGH_RISK_PROFILE_FIELDS = {
-	"bank_name": "Bank name",
-	"branch_name": "Branch name",
-	"account_name": "Account name",
-	"account_number": "Account number",
-	"swift_bic_code": "SWIFT/BIC code",
 	"supplier_name": "Legal name",
 }
+# Banking fields are intentionally excluded here: they can only be changed via
+# "Supplier Bank Detail Change Request", which requires a second Finance Officer's
+# approval before the new details are activated.
 
 COMMODITY_SCOPE_FIELD = "primary_commodity_categories"
 COMMODITY_SCOPE_LABEL = "Commodity scope"

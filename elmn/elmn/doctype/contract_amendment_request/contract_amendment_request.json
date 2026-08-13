@@ -1,0 +1,225 @@
+{
+ "actions": [],
+ "allow_rename": 0,
+ "autoname": "naming_series:",
+ "creation": "2026-08-13 09:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "contract",
+  "vendor",
+  "column_break_header",
+  "status",
+  "required_approval_role",
+  "reason_section",
+  "reason",
+  "changes_section",
+  "changes",
+  "request_section",
+  "requested_by",
+  "requested_on",
+  "review_section",
+  "reviewed_by",
+  "reviewed_on",
+  "review_comment",
+  "column_break_review",
+  "new_contract"
+ ],
+ "fields": [
+  {
+   "default": "CAR-.YYYY.-",
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Series",
+   "options": "CAR-.YYYY.-",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "contract",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Contract",
+   "options": "Contract",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "vendor",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Vendor",
+   "options": "Supplier",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_header",
+   "fieldtype": "Column Break"
+  },
+  {
+   "default": "Pending Approval",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "in_standard_filter": 1,
+   "label": "Status",
+   "options": "Pending Approval\nApproved\nRejected",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "description": "Determined automatically from the Contract Amendment Settings approval matrix - a senior approver is required for amendments that change contract value by more than the configured threshold.",
+   "fieldname": "required_approval_role",
+   "fieldtype": "Link",
+   "in_standard_filter": 1,
+   "label": "Required approver",
+   "options": "Role",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "reason_section",
+   "fieldtype": "Section Break",
+   "label": "Reason"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Small Text",
+   "label": "Reason for amendment",
+   "read_only": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "changes_section",
+   "fieldtype": "Section Break",
+   "label": "Amended Terms"
+  },
+  {
+   "fieldname": "changes",
+   "fieldtype": "Table",
+   "label": "Changes",
+   "options": "Contract Amendment Item",
+   "read_only": 1
+  },
+  {
+   "fieldname": "request_section",
+   "fieldtype": "Section Break",
+   "label": "Request"
+  },
+  {
+   "fieldname": "requested_by",
+   "fieldtype": "Link",
+   "in_list_view": 1,
+   "label": "Requested by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "requested_on",
+   "fieldtype": "Datetime",
+   "label": "Requested on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "review_section",
+   "fieldtype": "Section Break",
+   "label": "Approval"
+  },
+  {
+   "fieldname": "reviewed_by",
+   "fieldtype": "Link",
+   "label": "Reviewed by",
+   "options": "User",
+   "read_only": 1
+  },
+  {
+   "fieldname": "reviewed_on",
+   "fieldtype": "Datetime",
+   "label": "Reviewed on",
+   "read_only": 1
+  },
+  {
+   "fieldname": "review_comment",
+   "fieldtype": "Small Text",
+   "label": "Review comment / rejection reason",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_review",
+   "fieldtype": "Column Break"
+  },
+  {
+   "description": "The new, versioned Contract created once this amendment is approved.",
+   "fieldname": "new_contract",
+   "fieldtype": "Link",
+   "label": "New contract version",
+   "options": "Contract",
+   "read_only": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-13 09:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Contract Amendment Request",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Procurement Officer",
+   "select": 1,
+   "share": 1,
+   "write": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Purchase Manager",
+   "select": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Head of Finance/Finance Approver",
+   "select": 1
+  },
+  {
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Accountant",
+   "select": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "track_changes": 1
+}

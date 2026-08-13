@@ -267,7 +267,7 @@
    "collapsible": 0,
    "collapsible_depends_on": null,
    "columns": 0,
-   "creation": "2026-07-14 00:00:00.000000",
+   "creation": "2026-07-14 09:30:00.000000",
    "default": null,
    "depends_on": "eval:doc.custom_is_facility_user==true;",
    "description": "Role granted on the linked User account when this Employee is provisioned as a Facility User.",

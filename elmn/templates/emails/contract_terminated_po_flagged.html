@@ -1,0 +1,8 @@
+<p>{{ _("Contract {0} was terminated.").format(contract_id) }}</p>
+<p><b>{{ _("Reason") }}:</b> {{ reason }}</p>
+<p>{{ _("The following purchase order(s) reference this contract and have been flagged for review:") }}</p>
+<ul>
+{% for po in purchase_orders %}
+	<li><a href="{{ po.url }}">{{ po.name }}</a></li>
+{% endfor %}
+</ul>

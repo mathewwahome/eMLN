@@ -1,0 +1,64 @@
+{
+ "actions": [],
+ "creation": "2026-08-13 09:35:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "standard_approver_role",
+  "senior_approver_role",
+  "major_value_change_threshold_percent"
+ ],
+ "fields": [
+  {
+   "default": "Purchase Manager",
+   "description": "Approves amendments that don't change the contract value by more than the threshold below.",
+   "fieldname": "standard_approver_role",
+   "fieldtype": "Link",
+   "label": "Standard approver role",
+   "options": "Role",
+   "reqd": 1
+  },
+  {
+   "default": "Head of Finance/Finance Approver",
+   "description": "Approves amendments that change the contract value by more than the threshold below.",
+   "fieldname": "senior_approver_role",
+   "fieldtype": "Link",
+   "label": "Senior approver role",
+   "options": "Role",
+   "reqd": 1
+  },
+  {
+   "default": "10",
+   "description": "An amendment that changes Contract value by more than this percentage requires the senior approver role instead of the standard one.",
+   "fieldname": "major_value_change_threshold_percent",
+   "fieldtype": "Percent",
+   "label": "Major value change threshold (%)",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "issingle": 1,
+ "links": [],
+ "modified": "2026-08-13 09:35:00.000000",
+ "modified_by": "Administrator",
+ "module": "eLMN",
+ "name": "Contract Amendment Settings",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "print": 1,
+   "read": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

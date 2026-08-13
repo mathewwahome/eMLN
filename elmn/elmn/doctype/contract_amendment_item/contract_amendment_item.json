@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 0,
- "creation": "2026-07-31 09:35:00.000000",
+ "creation": "2026-08-13 09:00:00.000000",
  "doctype": "DocType",
  "editable_grid": 1,
  "engine": "InnoDB",
@@ -9,8 +9,7 @@
   "fieldname",
   "field_label",
   "old_value",
-  "new_value",
-  "is_high_risk"
+  "new_value"
  ],
  "fields": [
   {
@@ -31,34 +30,26 @@
   },
   {
    "fieldname": "old_value",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
    "label": "Current value",
    "read_only": 1
   },
   {
    "fieldname": "new_value",
-   "fieldtype": "Data",
+   "fieldtype": "Small Text",
    "in_list_view": 1,
-   "label": "Requested value",
-   "read_only": 1
-  },
-  {
-   "default": "0",
-   "fieldname": "is_high_risk",
-   "fieldtype": "Check",
-   "in_list_view": 1,
-   "label": "High risk",
+   "label": "Amended value",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "istable": 1,
  "links": [],
- "modified": "2026-07-31 09:35:00.000000",
+ "modified": "2026-08-13 09:00:00.000000",
  "modified_by": "Administrator",
  "module": "eLMN",
- "name": "Vendor Profile Change Item",
+ "name": "Contract Amendment Item",
  "owner": "Administrator",
  "permissions": [],
  "row_format": "Dynamic",

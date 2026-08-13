@@ -43,7 +43,7 @@ web_include_css = "/assets/elmn/css/welcome.css"
 # page_js = {"page" : "public/js/file.js"}
 
 # include js in doctype views
-doctype_js = {"Item": "public/js/item.js", "Supplier": "public/js/supplier.js"}
+doctype_js = {"Item": "public/js/item.js", "Supplier": "public/js/supplier.js", "Contract": "public/js/contract.js"}
 # doctype_list_js = {"doctype" : "public/js/doctype_list.js"}
 # doctype_tree_js = {"doctype" : "public/js/doctype_tree.js"}
 # doctype_calendar_js = {"doctype" : "public/js/doctype_calendar.js"}
@@ -165,6 +165,11 @@ doc_events = {
 	},
 	"Purchase Receipt": {
 		"on_submit": "elmn.api.vendor.update_supplier_last_activity"
+	},
+	"Contract": {
+		"validate": "elmn.api.contract.sync_vendor_fields",
+		"on_submit": "elmn.api.contract.handle_submit",
+		"on_cancel": "elmn.api.contract.handle_cancel"
 	}
 }
 
@@ -175,6 +180,8 @@ scheduler_events = {
 	"daily": [
 		"elmn.api.catalogue.apply_due_retirements",
 		"elmn.api.vendor.send_draft_expiry_notices",
+		"elmn.api.contract.refresh_contract_statuses",
+		"elmn.api.contract.send_contract_expiry_alerts",
 	],
 }
 
@@ -278,4 +285,5 @@ fixtures = [
 	"Web Form",
 	"Email Template",
     "Custom DocPerm",
+    "Custom Field",
 ]

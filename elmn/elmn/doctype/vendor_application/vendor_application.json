@@ -20,17 +20,14 @@
   "company_registration_number",
   "column_break_reg",
   "registered_address",
-  "page_break_contact",
   "primary_contact_section",
   "primary_contact_name",
   "primary_contact_role",
   "column_break_contact",
   "primary_contact_email",
   "primary_contact_phone",
-  "page_break_product_scope",
   "product_scope_section",
   "commodities",
-  "page_break_banking",
   "banking_details_section",
   "bank_name",
   "branch_name",
@@ -38,7 +35,6 @@
   "account_name",
   "account_number",
   "swift_bic_code",
-  "page_break_documents",
   "documents_section",
   "documents",
   "document_review_status",
@@ -158,10 +154,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "page_break_contact",
-   "fieldtype": "Page Break"
-  },
-  {
    "fieldname": "primary_contact_section",
    "fieldtype": "Section Break",
    "label": "Primary Contact"
@@ -197,10 +189,6 @@
    "reqd": 1
   },
   {
-   "fieldname": "page_break_product_scope",
-   "fieldtype": "Page Break"
-  },
-  {
    "fieldname": "product_scope_section",
    "fieldtype": "Section Break",
    "label": "Product Scope"
@@ -211,10 +199,6 @@
    "fieldtype": "Table",
    "label": "Commodities supplied",
    "options": "Vendor Application Commodity"
-  },
-  {
-   "fieldname": "page_break_banking",
-   "fieldtype": "Page Break"
   },
   {
    "description": "Restricted to Finance roles: used to configure payment routing once this vendor is approved.",
@@ -263,10 +247,6 @@
    "fieldtype": "Data",
    "label": "SWIFT/BIC code",
    "permlevel": 1
-  },
-  {
-   "fieldname": "page_break_documents",
-   "fieldtype": "Page Break"
   },
   {
    "fieldname": "documents_section",
@@ -393,6 +373,11 @@
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [
+  {
+   "group": "Supplier",
+   "link_doctype": "Supplier",
+   "link_fieldname": "vendor_application"
+  },
   {
    "group": "Requests for Information",
    "link_doctype": "Vendor RFI",

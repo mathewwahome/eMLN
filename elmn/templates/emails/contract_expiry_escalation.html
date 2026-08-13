@@ -1,0 +1,9 @@
+<p style="color:#b91c1c"><b>{{ _("Escalation") }}:</b> {{ _("this vendor contract is close to expiry and no renewal action has been recorded yet.") }}</p>
+<ul>
+	<li><b>{{ _("Contract ID") }}:</b> {{ contract_id }}</li>
+	<li><b>{{ _("Vendor") }}:</b> {{ vendor_name }}</li>
+	<li><b>{{ _("Expiry date") }}:</b> {{ expiry_date }} ({{ _("{0} day(s) left").format(days_left) }})</li>
+	<li><b>{{ _("Commodity scope") }}:</b> {{ commodity_scope }}</li>
+</ul>
+<p><b>{{ _("Recommended action") }}:</b> {{ recommended_action }}</p>
+<p><a href="{{ url }}">{{ _("Open the contract") }}</a></p>
